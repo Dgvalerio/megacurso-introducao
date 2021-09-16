@@ -6,3 +6,6 @@ gen
 
 # Yarn
 node_modules
+
+# Jest
+coverage
