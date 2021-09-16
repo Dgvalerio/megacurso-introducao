@@ -1,5 +1,6 @@
 import { InvalidCredentialsError } from '../../../domain/errors/invalid-credentials-error';
 import { UnexpectedError } from '../../../domain/errors/unexpected-error';
+import { AccountModel } from '../../../domain/models/account-model';
 import { AuthenticationParams } from '../../../domain/usecases/authentication';
 import { HttpPostClient } from '../../protocols/http/http-post-client';
 import { HttpStatusCode } from '../../protocols/http/http-response';
@@ -7,7 +8,10 @@ import { HttpStatusCode } from '../../protocols/http/http-response';
 export class RemoteAuthentication {
   constructor(
     private readonly url: string,
-    private readonly httpPostClient: HttpPostClient
+    private readonly httpPostClient: HttpPostClient<
+      AuthenticationParams,
+      AccountModel
+    >
   ) {} // eslint-disable-line no-empty-function
 
   async auth(params: AuthenticationParams): Promise<void> {
@@ -15,6 +19,7 @@ export class RemoteAuthentication {
       url: this.url,
       body: params,
     });
+
     switch (httpResponse.statusCode) {
       case HttpStatusCode.ok:
         break;
