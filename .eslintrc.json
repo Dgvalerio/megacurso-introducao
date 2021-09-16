@@ -92,7 +92,11 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    /**
+     * Project
+     * */
+    "import/prefer-default-export": "off"
   },
   "settings": {
     "import/resolver": {
