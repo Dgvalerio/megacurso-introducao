@@ -1,16 +1,15 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as faker from 'faker';
 
-import { InvalidCredentialsError } from '../../../domain/errors/invalid-credentials-error';
-import { UnexpectedError } from '../../../domain/errors/unexpected-error';
-import { AccountModel } from '../../../domain/models/account-model';
 import {
-  mockAccountModel,
-  mockAuthentication,
-} from '../../../domain/test/mock-account';
-import { AuthenticationParams } from '../../../domain/usecases/authentication';
-import { HttpStatusCode } from '../../protocols/http/http-response';
-import { HttpPostClientSpy } from '../../tests/mock-http-client';
+  InvalidCredentialsError,
+  UnexpectedError,
+} from '../../../domain/errors';
+import { AccountModel } from '../../../domain/models';
+import { mockAccountModel, mockAuthentication } from '../../../domain/test';
+import { AuthenticationParams } from '../../../domain/usecases';
+import { HttpStatusCode } from '../../protocols/http';
+import { HttpPostClientSpy } from '../../tests';
 import { RemoteAuthentication } from './remote-authentication';
 
 type SutTypes = {
