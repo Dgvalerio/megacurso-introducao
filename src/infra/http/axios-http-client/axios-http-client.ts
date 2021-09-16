@@ -5,6 +5,6 @@ import { HttpPostParams } from '../../../data/protocols/http';
 export class AxiosHttpClient {
   // eslint-disable-next-line class-methods-use-this
   async post(params: HttpPostParams<any>): Promise<void> {
-    await axios.post(params.url);
+    await axios.post(params.url, params.body);
   }
 }
