@@ -4,6 +4,12 @@
   "main": "index.js",
   "author": "Davi Gonçalves Valério <al.davigvalerio@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest --passWithNoTests",
+    "test:watch": "yarn test -- --watch",
+    "test:staged": "yarn test -- --findRelatedTest",
+    "test:ci": "yarn test -- --coverage"
+  },
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "@types/node": "^16.9.1",
