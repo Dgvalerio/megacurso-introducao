@@ -7,7 +7,7 @@ export class RemoteAuthentication {
   ) {} // eslint-disable-line no-empty-function
 
   async auth(): Promise<void> {
-    await this.httpPostClient.post(this.url);
+    await this.httpPostClient.post({ url: this.url });
     return Promise.resolve();
   }
 }
