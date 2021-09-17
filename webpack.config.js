@@ -1,6 +1,6 @@
-/* eslint-disable */
-const path = require('path');
+/* eslint-disable import/no-unresolved,import/no-extraneous-dependencies,import/order,import/no-self-import */
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   mode: 'development',
@@ -11,7 +11,21 @@ module.exports = {
     filename: 'bundle.js',
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.scss'],
+  },
+  module: {
+    rules: [
+      { test: /\.ts(x?)$/, loader: 'ts-loader', exclude: /node_modules/ },
+      {
+        test: /\.scss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader', options: { modules: true } },
+          { loader: 'sass-loader' },
+        ],
+        exclude: /node_modules/,
+      },
+    ],
   },
   devServer: {
     contentBase: './public',
@@ -22,7 +36,5 @@ module.exports = {
     react: 'React',
     'react-dom': 'ReactDOM',
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-  ]
+  plugins: [new CleanWebpackPlugin()],
 };
