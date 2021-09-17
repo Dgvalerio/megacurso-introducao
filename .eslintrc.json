@@ -3,12 +3,14 @@
   "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb",
-    "prettier"
+    "prettier",
+    "plugin:react/recommended"
   ],
   "plugins": [
     "prettier",
     "import-helpers",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "react"
   ],
   "rules": {
     /**
@@ -96,10 +98,15 @@
     /**
      * Project
      * */
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
   },
   "settings": {
     "import/resolver": {
+      "react": {
+        "version": "detect"
+      },
       "node": {
         "extensions": [
           ".js",
