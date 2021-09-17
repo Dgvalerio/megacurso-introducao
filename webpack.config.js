@@ -23,14 +23,18 @@ module.exports = {
           { loader: 'css-loader', options: { modules: true } },
           { loader: 'sass-loader' },
         ],
-        exclude: /node_modules/,
       },
     ],
   },
   devServer: {
-    contentBase: './public',
-    writeToDisk: true,
+    devMiddleware: {
+      writeToDisk: true,
+    },
+    static: {
+      directory: './public',
+    },
     historyApiFallback: true,
+    port: 8080,
   },
   externals: {
     react: 'React',
