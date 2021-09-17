@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --open",
+    "dev": "webpack-dev-server --open --stats-error-details",
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "yarn test -- --watch",
     "test:staged": "yarn test -- --findRelatedTest",
