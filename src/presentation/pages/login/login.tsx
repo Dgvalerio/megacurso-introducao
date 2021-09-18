@@ -1,14 +1,11 @@
 import React, { FC } from 'react';
 
-import Footer from '../../components/footer/footer';
-import FormStatus from '../../components/form-status/form-status';
-import Input from '../../components/input/input';
-import Header from '../../components/login-header/login-header';
+import { Footer, FormStatus, Input, LoginHeader } from '../../components';
 import Styles from './login-styles.scss';
 
-export const Login: FC = () => (
+const Login: FC = () => (
   <div className={Styles.login}>
-    <Header />
+    <LoginHeader />
     <form className={Styles.form}>
       <h2>Login</h2>
       <Input
@@ -32,3 +29,5 @@ export const Login: FC = () => (
     <Footer />
   </div>
 );
+
+export default Login;
