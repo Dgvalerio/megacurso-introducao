@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-import Logo from '../../components/logo/logo';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/login-header/login-header';
 import Spinner from '../../components/spinner/spinner';
 import Styles from './login-styles.scss';
 
-export const Login: React.FC = () => (
+export const Login: FC = () => (
   <div className={Styles.login}>
-    <header className={Styles.header}>
-      <Logo />
-      <h1>4Dev - Enquetes para Programadores</h1>
-    </header>
+    <Header />
     <form className={Styles.form}>
       <h2>Login</h2>
       <label htmlFor="email">
@@ -39,6 +37,6 @@ export const Login: React.FC = () => (
         <span className={Styles.error}>Erro</span>
       </div>
     </form>
-    <footer className={Styles.footer} />
+    <Footer />
   </div>
 );
