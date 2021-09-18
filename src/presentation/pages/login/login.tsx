@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import Footer from '../../components/footer/footer';
+import Input from '../../components/input/input';
 import Header from '../../components/login-header/login-header';
 import Spinner from '../../components/spinner/spinner';
 import Styles from './login-styles.scss';
@@ -10,24 +11,18 @@ export const Login: FC = () => (
     <Header />
     <form className={Styles.form}>
       <h2>Login</h2>
-      <label htmlFor="email">
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Digite seu e-mail"
-        />
-        <span className={Styles.status}>🔴</span>
-      </label>
-      <label htmlFor="password">
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Digite seu senha"
-        />
-        <span className={Styles.status}>🔴</span>
-      </label>
+      <Input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Digite seu e-mail"
+      />
+      <Input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Digite seu senha"
+      />
       <button className={Styles.submit} type="submit">
         Entrar
       </button>
