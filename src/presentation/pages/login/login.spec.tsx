@@ -8,11 +8,26 @@ import {
 import faker from 'faker';
 import React from 'react';
 
+import { AccountModel } from '../../../domain/models';
+import { mockAccountModel } from '../../../domain/test';
+import { Authentication, AuthenticationParams } from '../../../domain/usecases';
 import { ValidationStub } from '../../test';
 import Login from './login';
 
+class AuthenticationSpy implements Authentication {
+  account = mockAccountModel();
+
+  params: AuthenticationParams;
+
+  auth(params: AuthenticationParams): Promise<AccountModel> {
+    this.params = params;
+    return Promise.resolve(this.account);
+  }
+}
+
 type SutTypes = {
   sut: RenderResult;
+  authenticationSpy: AuthenticationSpy;
 };
 
 type SutParams = {
@@ -21,12 +36,15 @@ type SutParams = {
 
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub();
+  const authenticationSpy = new AuthenticationSpy();
 
   validationStub.errorMessage = params?.validationError;
 
-  const sut = render(<Login validation={validationStub} />);
+  const sut = render(
+    <Login validation={validationStub} authentication={authenticationSpy} />
+  );
 
-  return { sut };
+  return { sut, authenticationSpy };
 };
 
 describe('Login Component', () => {
@@ -160,5 +178,24 @@ describe('Login Component', () => {
     const spinner = getByTestId('spinner');
 
     expect(spinner).toBeTruthy();
+  });
+
+  test('should call Authentication with correct values', () => {
+    const {
+      sut: { getByTestId },
+      authenticationSpy,
+    } = makeSut();
+
+    const email = faker.internet.email();
+    const emailInput = getByTestId('email');
+    const password = faker.internet.password();
+    const passwordInput = getByTestId('password');
+    const submitButton = getByTestId('submit') as HTMLButtonElement;
+
+    fireEvent.input(emailInput, { target: { value: email } });
+    fireEvent.input(passwordInput, { target: { value: password } });
+    fireEvent.click(submitButton);
+
+    expect(authenticationSpy.params).toEqual({ email, password });
   });
 });
