@@ -5,6 +5,8 @@ import {
   render,
   RenderResult,
 } from '@testing-library/react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import faker from 'faker';
 import React from 'react';
 
 import { ValidationSpy } from '../../test';
@@ -56,11 +58,12 @@ describe('Login Component', () => {
     } = makeSut();
 
     const emailInput = getByTestId('email');
+    const email = faker.internet.email();
 
-    fireEvent.input(emailInput, { target: { value: 'any_email' } });
+    fireEvent.input(emailInput, { target: { value: email } });
 
     expect(validationSpy.fieldName).toEqual('email');
-    expect(validationSpy.fieldValue).toEqual('any_email');
+    expect(validationSpy.fieldValue).toEqual(email);
   });
 
   test('should call Validation with correct password', () => {
@@ -70,10 +73,11 @@ describe('Login Component', () => {
     } = makeSut();
 
     const passwordInput = getByTestId('password');
+    const password = faker.internet.password();
 
-    fireEvent.input(passwordInput, { target: { value: 'any_password' } });
+    fireEvent.input(passwordInput, { target: { value: password } });
 
     expect(validationSpy.fieldName).toEqual('password');
-    expect(validationSpy.fieldValue).toEqual('any_password');
+    expect(validationSpy.fieldValue).toEqual(password);
   });
 });
