@@ -3,8 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { Login } from '../../pages';
 
-import '../../styles/global.scss';
-
 const Router: FC = () => (
   <BrowserRouter>
     <Switch>
