@@ -20,18 +20,12 @@ const Login: FC<Props> = ({ validation }) => {
   });
 
   useEffect(() => {
-    setState((prev) => ({
-      ...prev,
+    setState({
+      ...state,
       emailError: validation.validate('email', state.email),
-    }));
-  }, [state.email]);
-
-  useEffect(() => {
-    setState((prev) => ({
-      ...prev,
       passwordError: validation.validate('password', state.password),
-    }));
-  }, [state.password]);
+    });
+  }, [state.email, state.password]);
 
   return (
     <div className={Styles.login}>
