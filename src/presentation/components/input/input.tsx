@@ -21,9 +21,9 @@ const Input: FC<Props> = ({ id, name, ...props }) => {
     setState({ ...state, [event.target.name]: event.target.value });
   };
 
-  const getStatus = (): string => '🔴';
+  const getStatus = (): string => (error ? '🔴' : '🟢');
 
-  const getTitle = (): string => error;
+  const getTitle = (): string => error || 'Tudo certo!';
 
   return (
     <label htmlFor={id} className={Styles.inputWrap}>
