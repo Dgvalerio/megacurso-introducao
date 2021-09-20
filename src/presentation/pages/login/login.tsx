@@ -15,19 +15,22 @@ const Login: FC<Props> = ({ validation }) => {
     email: '',
     emailError: '',
     password: '',
-    passwordError: 'Campo obrigatório',
+    passwordError: '',
     mainError: '',
   });
 
   useEffect(() => {
-    setState({
-      ...state,
+    setState((prev) => ({
+      ...prev,
       emailError: validation.validate('email', state.email),
-    });
+    }));
   }, [state.email]);
 
   useEffect(() => {
-    validation.validate('password', state.password);
+    setState((prev) => ({
+      ...prev,
+      passwordError: validation.validate('password', state.password),
+    }));
   }, [state.password]);
 
   return (
