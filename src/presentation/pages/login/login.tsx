@@ -49,7 +49,7 @@ const Login: FC<Props> = ({ validation }) => {
             className={Styles.submit}
             type="submit"
             data-testid="submit"
-            disabled
+            disabled={!!(state.emailError || state.passwordError)}
           >
             Entrar
           </button>
