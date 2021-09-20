@@ -1,11 +1,10 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 import {
   cleanup,
   fireEvent,
   render,
   RenderResult,
 } from '@testing-library/react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
 import React from 'react';
 
@@ -19,6 +18,9 @@ type SutTypes = {
 
 const makeSut = (): SutTypes => {
   const validationSpy = new ValidationSpy();
+
+  validationSpy.errorMessage = faker.random.words();
+
   const sut = render(<Login validation={validationSpy} />);
 
   return { sut, validationSpy };
@@ -30,6 +32,7 @@ describe('Login Component', () => {
   test('should start with initial state', () => {
     const {
       sut: { getByTestId },
+      validationSpy,
     } = makeSut();
 
     const errorWrap = getByTestId('error-wrap');
@@ -40,12 +43,12 @@ describe('Login Component', () => {
 
     expect(submitButton.disabled).toBe(true);
 
-    const emailStatus = getByTestId('email-status') as HTMLButtonElement;
+    const emailStatus = getByTestId('email-status');
 
-    expect(emailStatus.title).toBe('Campo obrigatório');
+    expect(emailStatus.title).toBe(validationSpy.errorMessage);
     expect(emailStatus.textContent).toBe('🔴');
 
-    const passwordStatus = getByTestId('password-status') as HTMLButtonElement;
+    const passwordStatus = getByTestId('password-status');
 
     expect(passwordStatus.title).toBe('Campo obrigatório');
     expect(passwordStatus.textContent).toBe('🔴');
@@ -79,5 +82,20 @@ describe('Login Component', () => {
 
     expect(validationSpy.fieldName).toEqual('password');
     expect(validationSpy.fieldValue).toEqual(password);
+  });
+
+  test('should show email error if Validation fails', () => {
+    const {
+      sut: { getByTestId },
+      validationSpy,
+    } = makeSut();
+
+    const emailInput = getByTestId('email');
+    const emailStatus = getByTestId('email-status');
+
+    fireEvent.input(emailInput, { target: { value: faker.internet.email() } });
+
+    expect(emailStatus.title).toBe(validationSpy.errorMessage);
+    expect(emailStatus.textContent).toBe('🔴');
   });
 });
