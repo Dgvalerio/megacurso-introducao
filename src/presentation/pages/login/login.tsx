@@ -33,7 +33,12 @@ const Login: FC = () => {
             name="password"
             placeholder="Digite seu senha"
           />
-          <button className={Styles.submit} type="submit">
+          <button
+            className={Styles.submit}
+            type="submit"
+            data-testid="submit"
+            disabled
+          >
             Entrar
           </button>
           <span className={Styles.link}>Criar conta</span>
