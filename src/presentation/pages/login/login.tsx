@@ -36,10 +36,13 @@ const Login: FC<Props> = ({ validation, authentication }) => {
       if (state.isLoading || state.emailError || state.passwordError) return;
 
       setState((prev) => ({ ...prev, isLoading: true }));
-      await authentication.auth({
+
+      const account = await authentication.auth({
         email: state.email,
         password: state.password,
       });
+
+      localStorage.setItem('accessToken', account.accessToken);
     } catch (e) {
       setState((prev) => ({ ...prev, isLoading: false, mainError: e.message }));
     }
