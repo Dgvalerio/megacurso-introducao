@@ -204,7 +204,7 @@ describe('Login Component', () => {
     expect(errorWrap.childElementCount).toBe(1);
   });
 
-  test('should present error if Authentication fails', async () => {
+  test('should add accessToken to localstorage on success', async () => {
     const { sut, authenticationSpy } = makeSut();
 
     simulateValidSubmit(sut);
