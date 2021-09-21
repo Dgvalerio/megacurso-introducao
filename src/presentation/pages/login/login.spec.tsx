@@ -13,6 +13,8 @@ import { InvalidCredentialsError } from '../../../domain/errors';
 import { AuthenticationSpy, ValidationStub } from '../../test';
 import Login from './login';
 
+import 'jest-localstorage-mock';
+
 type SutTypes = {
   sut: RenderResult;
   authenticationSpy: AuthenticationSpy;
@@ -74,6 +76,8 @@ const simulateStatusForField = (
 
 describe('Login Component', () => {
   afterEach(cleanup);
+
+  beforeEach(() => localStorage.clear());
 
   test('should start with initial state', () => {
     const validationError = faker.random.words();
@@ -198,5 +202,18 @@ describe('Login Component', () => {
     expect(mainError.textContent).toBe(error.message);
 
     expect(errorWrap.childElementCount).toBe(1);
+  });
+
+  test('should present error if Authentication fails', async () => {
+    const { sut, authenticationSpy } = makeSut();
+
+    simulateValidSubmit(sut);
+
+    await waitFor(() => sut.getByTestId('form'));
+
+    expect(localStorage.setItem).toHaveBeenCalledWith(
+      'accessToken',
+      authenticationSpy.account.accessToken
+    );
   });
 });
