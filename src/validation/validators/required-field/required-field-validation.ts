@@ -1,5 +1,5 @@
-import { RequiredFieldError } from '../errors';
-import { FieldValidation } from '../protocols/field-validation';
+import { RequiredFieldError } from '../../errors';
+import { FieldValidation } from '../../protocols/field-validation';
 
 export class RequiredFieldValidation implements FieldValidation {
   // eslint-disable-next-line no-empty-function

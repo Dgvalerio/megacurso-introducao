@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
 
-import { RequiredFieldError } from '../errors';
+import { RequiredFieldError } from '../../errors';
 import { RequiredFieldValidation } from './required-field-validation';
 
 const makeSut = () => new RequiredFieldValidation(faker.database.column());
