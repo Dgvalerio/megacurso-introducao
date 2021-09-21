@@ -32,10 +32,17 @@ const Login: FC<Props> = ({ validation, authentication }) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (state.isLoading || state.emailError || state.passwordError) return;
+    try {
+      if (state.isLoading || state.emailError || state.passwordError) return;
 
-    setState((prev) => ({ ...prev, isLoading: true }));
-    await authentication.auth({ email: state.email, password: state.password });
+      setState((prev) => ({ ...prev, isLoading: true }));
+      await authentication.auth({
+        email: state.email,
+        password: state.password,
+      });
+    } catch (e) {
+      setState((prev) => ({ ...prev, isLoading: false, mainError: e.message }));
+    }
   };
 
   return (
