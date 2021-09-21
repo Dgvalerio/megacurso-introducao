@@ -9,3 +9,7 @@ node_modules
 
 # Jest
 coverage
+
+# Public
+public
+*.scss

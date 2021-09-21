@@ -3,12 +3,14 @@
   "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb",
-    "prettier"
+    "prettier",
+    "plugin:react/recommended"
   ],
   "plugins": [
     "prettier",
     "import-helpers",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "react"
   ],
   "rules": {
     /**
@@ -96,7 +98,21 @@
     /**
      * Project
      * */
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [
+          ".jsx",
+          ".js",
+          ".tsx",
+          ".ts"
+        ]
+      }
+    ],
+    "react/jsx-props-no-spreading": "off"
   },
   "settings": {
     "import/resolver": {
