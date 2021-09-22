@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved,import/no-extraneous-dependencies,import/order,import/no-self-import */
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -40,5 +41,10 @@ module.exports = {
     react: 'React',
     'react-dom': 'ReactDOM',
   },
-  plugins: [new CleanWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    DefinePlugin({
+      'process.env.API_URL': 'http://fordevs.herokuapp.com/api',
+    }),
+  ],
 };
