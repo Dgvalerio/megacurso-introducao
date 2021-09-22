@@ -13,7 +13,7 @@ import { Router } from 'react-router-dom';
 
 import { InvalidCredentialsError } from '../../../domain/errors';
 import { AuthenticationSpy, ValidationStub } from '../../test';
-import Login from './login';
+import { Login } from '../index';
 
 import 'jest-localstorage-mock';
 
