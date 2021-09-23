@@ -13,3 +13,4 @@ coverage
 # Public
 public
 *.scss
+*.json
