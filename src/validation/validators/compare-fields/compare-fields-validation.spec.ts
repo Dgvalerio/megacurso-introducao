@@ -16,4 +16,14 @@ describe('CompareFieldsValidation', () => {
 
     expect(error).toEqual(new InvalidFieldError(fieldName));
   });
+
+  test('should return falsy if compare is valid', () => {
+    const fieldName = faker.database.column();
+    const valueToCompare = faker.random.word();
+    const sut = makeSut(fieldName, valueToCompare);
+
+    const error = sut.validate(valueToCompare);
+
+    expect(error).toBeFalsy();
+  });
 });
