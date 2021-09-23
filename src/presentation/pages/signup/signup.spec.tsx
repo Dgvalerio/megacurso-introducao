@@ -246,4 +246,15 @@ describe('SignUp Component', () => {
 
     Helper.testChildCount(sut, 'error-wrap', 1);
   });
+
+  test('should go to login page', () => {
+    const { sut } = makeSut();
+
+    const loginLink = sut.getByTestId('login-link');
+
+    fireEvent.click(loginLink);
+
+    expect(history.length).toBe(1);
+    expect(history.location.pathname).toBe('/login');
+  });
 });
