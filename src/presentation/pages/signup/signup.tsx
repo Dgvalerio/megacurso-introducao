@@ -70,7 +70,14 @@ const SignUp: FC<Props> = ({ validation }) => {
             className={Styles.submit}
             type="submit"
             data-testid="submit"
-            disabled
+            disabled={
+              !!(
+                state.nameError ||
+                state.emailError ||
+                state.passwordError ||
+                state.passwordConfirmationError
+              )
+            }
           >
             Entrar
           </button>
