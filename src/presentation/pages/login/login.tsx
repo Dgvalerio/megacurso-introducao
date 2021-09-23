@@ -82,7 +82,7 @@ const Login: FC<Props> = ({ validation, authentication, saveAccessToken }) => {
           >
             Entrar
           </button>
-          <Link className={Styles.link} data-testid="signup" to="/signup">
+          <Link className={Styles.link} data-testid="signup-link" to="/signup">
             Criar conta
           </Link>
           <FormStatus />
