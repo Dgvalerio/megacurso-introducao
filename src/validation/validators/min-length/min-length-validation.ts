@@ -5,9 +5,10 @@ export class MinLengthValidation implements FieldValidation {
   // eslint-disable-next-line no-empty-function
   constructor(readonly field: string, private readonly minLength: number) {}
 
-  validate(value: string): Error {
-    return value.length >= this.minLength
-      ? null
-      : new InvalidFieldError(this.field);
+  validate(input: object): Error {
+    const value = (input as { [key: string]: string })[this.field];
+    return value?.length < this.minLength
+      ? new InvalidFieldError(this.field)
+      : null;
   }
 }

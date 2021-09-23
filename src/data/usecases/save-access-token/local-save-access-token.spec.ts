@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
 
-import { SetStorageMock } from '../../tests/mock-storage';
+import { SetStorageMock } from '../../tests';
 import { LocalSaveAccessToken } from './local-save-access-token';
 
 type SutTypes = {

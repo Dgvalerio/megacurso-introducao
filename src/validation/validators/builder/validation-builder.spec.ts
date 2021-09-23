@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
 
+import { CompareFieldsValidation } from '../compare-fields/compare-fields-validation';
 import {
   EmailValidation,
   MinLengthValidation,
@@ -29,6 +30,16 @@ describe('ValidationBuilder', () => {
     const validations = sut.field(fieldName).min(length).build();
 
     expect(validations).toEqual([new MinLengthValidation(fieldName, length)]);
+  });
+
+  test('should return CompareFieldsValidation', () => {
+    const fieldName = faker.database.column();
+    const fieldToCompareName = faker.database.column();
+    const validations = sut.field(fieldName).sameAs(fieldToCompareName).build();
+
+    expect(validations).toEqual([
+      new CompareFieldsValidation(fieldName, fieldToCompareName),
+    ]);
   });
 
   test('should return a list of validations', () => {
