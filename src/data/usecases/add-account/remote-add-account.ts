@@ -1,6 +1,7 @@
+import { EmailInUseError } from '../../../domain/errors';
 import { AccountModel } from '../../../domain/models';
 import { AddAccount, AddAccountParams } from '../../../domain/usecases';
-import { HttpPostClient } from '../../protocols/http';
+import { HttpPostClient, HttpStatusCode } from '../../protocols/http';
 
 export class RemoteAddAccount implements AddAccount {
   constructor(
@@ -12,11 +13,16 @@ export class RemoteAddAccount implements AddAccount {
   ) {} // eslint-disable-line no-empty-function
 
   async add(params: AddAccountParams): Promise<AccountModel> {
-    await this.httpPostClient.post({
+    const httpResponse = await this.httpPostClient.post({
       url: this.url,
       body: params,
     });
 
-    return null;
+    switch (httpResponse.statusCode) {
+      case HttpStatusCode.forbidden:
+        throw new EmailInUseError();
+      default:
+        return null;
+    }
   }
 }
