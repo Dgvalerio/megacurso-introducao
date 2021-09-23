@@ -1,9 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
 
+import { EmailInUseError } from '../../../domain/errors';
 import { AccountModel } from '../../../domain/models';
 import { mockAddAccount } from '../../../domain/test';
 import { AddAccountParams } from '../../../domain/usecases';
+import { HttpStatusCode } from '../../protocols/http';
 import { HttpPostClientSpy } from '../../tests';
 import { RemoteAddAccount } from './remote-add-account';
 
@@ -43,5 +45,19 @@ describe('RemoteAddAccount', () => {
     await sut.add(addAccountParams);
 
     expect(httpPostClientSpy.body).toEqual(addAccountParams);
+  });
+
+  test('Should throw EmailInUseError if HttpClient returns 403', async () => {
+    const { sut, httpPostClientSpy } = makeSut();
+
+    httpPostClientSpy.response = {
+      statusCode: HttpStatusCode.forbidden,
+    };
+
+    const addAccountParams = mockAddAccount();
+
+    const promise = sut.add(addAccountParams);
+
+    await expect(promise).rejects.toThrow(new EmailInUseError());
   });
 });
