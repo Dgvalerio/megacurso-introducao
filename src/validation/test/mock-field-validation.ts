@@ -6,7 +6,7 @@ export class FieldValidationSpy implements FieldValidation {
   // eslint-disable-next-line no-empty-function
   constructor(readonly field: string) {}
 
-  validate(value: string): Error {
+  validate(input: object): Error {
     return this.error;
   }
 }
