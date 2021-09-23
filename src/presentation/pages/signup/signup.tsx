@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 
+import { AddAccount } from '../../../domain/usecases';
 import { Footer, FormStatus, Input, LoginHeader } from '../../components';
 import Context from '../../contexts/form/form-context';
 import { Validation } from '../../protocols/validation';
@@ -7,9 +8,10 @@ import Styles from './signup-styles.scss';
 
 type Props = {
   validation: Validation;
+  addAccount: AddAccount;
 };
 
-const SignUp: FC<Props> = ({ validation }) => {
+const SignUp: FC<Props> = ({ validation, addAccount }) => {
   const [state, setState] = useState({
     isLoading: false,
     name: '',
@@ -40,6 +42,12 @@ const SignUp: FC<Props> = ({ validation }) => {
     event.preventDefault();
 
     setState((prev) => ({ ...prev, isLoading: true }));
+    await addAccount.add({
+      name: state.name,
+      email: state.email,
+      password: state.password,
+      passwordConfirmation: state.passwordConfirmation,
+    });
   };
 
   return (
