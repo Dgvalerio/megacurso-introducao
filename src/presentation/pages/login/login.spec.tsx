@@ -67,10 +67,6 @@ const simulateValidSubmit = async (
   await waitFor(() => form);
 };
 
-const testElementExists = (sut: RenderResult, fieldName: string): void => {
-  expect(sut.getByTestId(fieldName)).toBeTruthy();
-};
-
 const testElementText = (
   sut: RenderResult,
   fieldName: string,
@@ -143,7 +139,7 @@ describe('Login Component', () => {
 
     await simulateValidSubmit(sut);
 
-    testElementExists(sut, 'spinner');
+    Helper.testElementExists(sut, 'spinner');
   });
 
   test('should call Authentication with correct values', async () => {
