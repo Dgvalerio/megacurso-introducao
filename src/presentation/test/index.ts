@@ -1,4 +1,9 @@
 /**
+ * Form Helper
+ * */
+export * as Helper from './form-helper';
+
+/**
  * Authentication Mock
  * */
 export * from './mock-authentication';
