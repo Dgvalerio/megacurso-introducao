@@ -1,10 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import {
-  cleanup,
-  fireEvent,
-  render,
-  RenderResult,
-} from '@testing-library/react';
+import { cleanup, render, RenderResult } from '@testing-library/react';
 import faker from 'faker';
 import React from 'react';
 
@@ -28,14 +23,6 @@ const makeSut = (params?: SutParams): SutTypes => {
   return { sut };
 };
 
-const populateField = (
-  sut: RenderResult,
-  fieldName: string,
-  value = faker.random.word()
-): void => {
-  fireEvent.input(sut.getByTestId(fieldName), { target: { value } });
-};
-
 describe('SignUp Component', () => {
   afterEach(cleanup);
 
@@ -57,7 +44,7 @@ describe('SignUp Component', () => {
     const validationError = faker.random.words();
     const { sut } = makeSut({ validationError });
 
-    populateField(sut, 'name');
+    Helper.populateField(sut, 'name');
 
     Helper.testStatusForField(sut, 'name', validationError);
   });

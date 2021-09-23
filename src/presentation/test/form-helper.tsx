@@ -1,5 +1,6 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { RenderResult } from '@testing-library/react';
+/* eslint-disable import/no-extraneous-dependencies */
+import { fireEvent, RenderResult } from '@testing-library/react';
+import faker from 'faker';
 
 export const testChildCount = (
   sut: RenderResult,
@@ -28,4 +29,12 @@ export const testStatusForField = (
 
   expect(fieldStatus.title).toBe(validationError || 'Tudo certo!');
   expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🟢');
+};
+
+export const populateField = (
+  sut: RenderResult,
+  fieldName: string,
+  value = faker.random.word()
+): void => {
+  fireEvent.input(sut.getByTestId(fieldName), { target: { value } });
 };
