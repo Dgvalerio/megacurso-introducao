@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
 
-import { EmailInUseError } from '../../../domain/errors';
+import { EmailInUseError, UnexpectedError } from '../../../domain/errors';
 import { AccountModel } from '../../../domain/models';
 import { mockAddAccount } from '../../../domain/test';
 import { AddAccountParams } from '../../../domain/usecases';
@@ -59,5 +59,19 @@ describe('RemoteAddAccount', () => {
     const promise = sut.add(addAccountParams);
 
     await expect(promise).rejects.toThrow(new EmailInUseError());
+  });
+
+  test('Should throw UnexpectedError if HttpClient returns 400', async () => {
+    const { sut, httpPostClientSpy } = makeSut();
+
+    httpPostClientSpy.response = {
+      statusCode: HttpStatusCode.badRequest,
+    };
+
+    const addAccountParams = mockAddAccount();
+
+    const promise = sut.add(addAccountParams);
+
+    await expect(promise).rejects.toThrow(new UnexpectedError());
   });
 });
