@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
 
-import * as Helper from '../support/http-mocks';
+import * as Helper from './http-mocks';
 
 export const mockInvalidCredentialsError = () =>
   Helper.mockInvalidCredentialsError(/login/);
