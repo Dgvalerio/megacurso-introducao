@@ -157,4 +157,23 @@ describe('Login', () => {
       assert.isOk(window.localStorage.getItem('accessToken'))
     );
   });
+
+  it('should prevent multiple submit', () => {
+    cy.route({
+      method: 'POST',
+      url: /login/,
+      status: 200,
+      response: {
+        accessToken: faker.datatype.uuid(),
+      },
+    }).as('request');
+
+    cy.getByTestId('email').focus().type(faker.internet.email());
+
+    cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5));
+
+    cy.getByTestId('submit').dblclick();
+
+    cy.get('@request.all').should('have.length', 1);
+  });
 });
