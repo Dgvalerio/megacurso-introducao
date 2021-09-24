@@ -15,11 +15,16 @@ const Input: FC<Props> = ({ id, name, ...props }) => {
   const error = state[`${name}Error`];
 
   return (
-    <div className={Styles.inputWrap}>
+    <div
+      className={Styles.inputWrap}
+      data-status={error ? 'invalid' : 'valid'}
+      data-testid={`${name}-wrap`}
+    >
       <input
         id={id}
         name={name}
         {...props}
+        title={error}
         placeholder=" "
         readOnly
         onFocus={(e) => {
@@ -30,14 +35,9 @@ const Input: FC<Props> = ({ id, name, ...props }) => {
           setState({ ...state, [e.target.name]: e.target.value })
         }
       />
-      <label htmlFor={id}>{props.placeholder}</label>
-      <span
-        data-testid={`${name}-status`}
-        title={error || 'Tudo certo!'}
-        className={Styles.status}
-      >
-        {error ? '🔴' : '🟢'}
-      </span>
+      <label htmlFor={id} data-testid={`${name}-label`} title={error}>
+        {props.placeholder}
+      </label>
     </div>
   );
 };
