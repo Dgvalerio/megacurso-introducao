@@ -57,7 +57,7 @@ describe('Login', () => {
     cy.getByTestId('error-wrap').should('not.have.descendants');
   });
 
-  it('should present error if invalid credentials are provided', () => {
+  it('should present InvalidCredentialsError on 401', () => {
     cy.route({
       method: 'POST',
       url: /login/,
