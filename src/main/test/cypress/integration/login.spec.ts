@@ -117,9 +117,9 @@ describe('Login', () => {
       },
     });
 
-    cy.getByTestId('email').focus().type('mango@gmail.com');
+    cy.getByTestId('email').focus().type(faker.internet.email());
 
-    cy.getByTestId('password').focus().type('12345');
+    cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5));
 
     cy.getByTestId('submit').click();
 
@@ -142,9 +142,9 @@ describe('Login', () => {
       },
     });
 
-    cy.getByTestId('email').focus().type('mango@gmail.com');
+    cy.getByTestId('email').focus().type(faker.internet.email());
 
-    cy.getByTestId('password').focus().type('12345');
+    cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5));
 
     cy.getByTestId('submit').click();
 
