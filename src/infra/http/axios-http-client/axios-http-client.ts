@@ -6,9 +6,9 @@ import {
   HttpResponse,
 } from '../../../data/protocols/http';
 
-export class AxiosHttpClient implements HttpPostClient<any, any> {
+export class AxiosHttpClient implements HttpPostClient {
   // eslint-disable-next-line class-methods-use-this
-  async post(params: HttpPostParams<any>): Promise<HttpResponse<any>> {
+  async post(params: HttpPostParams<any>): Promise<HttpResponse> {
     let httpResponse: AxiosResponse;
 
     try {
