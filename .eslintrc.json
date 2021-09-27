@@ -1,16 +1,21 @@
 {
   "root": true,
+  "env": {
+    "cypress/globals": true
+  },
   "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb",
     "prettier",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:cypress/recommended"
   ],
   "plugins": [
     "prettier",
     "import-helpers",
     "@typescript-eslint",
-    "react"
+    "react",
+    "cypress"
   ],
   "rules": {
     /**

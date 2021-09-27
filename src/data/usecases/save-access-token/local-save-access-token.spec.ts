@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
 
+import { UnexpectedError } from '../../../domain/errors';
 import { SetStorageMock } from '../../tests';
 import { LocalSaveAccessToken } from './local-save-access-token';
 
@@ -34,5 +35,13 @@ describe('LocalSaveAccessToken', () => {
     const promise = sut.save(faker.datatype.uuid());
 
     await expect(promise).rejects.toThrow(new Error());
+  });
+
+  test('should throw if accessToken is falsy', async () => {
+    const { sut } = makeSut();
+
+    const promise = sut.save(undefined);
+
+    await expect(promise).rejects.toThrow(new UnexpectedError());
   });
 });

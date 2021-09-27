@@ -2,7 +2,11 @@
   "compilerOptions": {
     "module": "esnext",
     "target": "es6",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "sourceMap": true,
     "esModuleInterop": true,
     "allowJs": true,
@@ -18,5 +22,8 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "src/main/test/cypress/**"
   ]
 }
