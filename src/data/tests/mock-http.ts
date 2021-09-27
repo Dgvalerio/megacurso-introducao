@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line import/no-extraneous-dependencies,max-classes-per-file
 import * as faker from 'faker';
 
 import {
@@ -6,6 +6,8 @@ import {
   HttpPostClient,
   HttpResponse,
   HttpStatusCode,
+  HttpGetClient,
+  HttpGetParams,
 } from '../protocols/http';
 
 export const mockPostRequest = (): HttpPostParams<any> => ({
@@ -31,5 +33,13 @@ export class HttpPostClientSpy<BodyType = any, ResponseType = any>
     this.body = params.body;
 
     return Promise.resolve(this.response);
+  }
+}
+
+export class HttpGetClientSpy implements HttpGetClient {
+  url: string;
+
+  async get(params: HttpGetParams): Promise<void> {
+    this.url = params.url;
   }
 }
