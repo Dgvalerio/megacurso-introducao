@@ -12,3 +12,8 @@ export const mockInvalidData = () =>
   Helper.mockOk('POST', /signup/, {
     invalid: faker.datatype.uuid(),
   });
+
+export const mockOk = () =>
+  Helper.mockOk('POST', /signup/, {
+    accessToken: faker.datatype.uuid(),
+  });
