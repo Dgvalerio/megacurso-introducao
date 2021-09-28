@@ -103,7 +103,7 @@ describe('RemoteAddAccount', () => {
     await expect(promise).rejects.toThrow(new UnexpectedError());
   });
 
-  test('Should throw UnexpectedError if HttpClient returns 200', async () => {
+  test('Should return an AccountModel if returns 200', async () => {
     const { sut, httpPostClientSpy } = makeSut();
 
     const httpResult = mockAccountModel();
