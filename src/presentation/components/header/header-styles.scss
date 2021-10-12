@@ -1,0 +1,8 @@
+@import "../../styles/colors";
+
+.headerWrap {
+  display: flex;
+  background-color: $primary;
+  border-top: 40px solid $primaryDark;
+  justify-content: center;
+}

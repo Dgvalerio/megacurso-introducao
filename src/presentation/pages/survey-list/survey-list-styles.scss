@@ -7,13 +7,6 @@
   min-height: 100vh;
   background-color: $disabledBackground;
 
-  .headerWrap {
-    display: flex;
-    background-color: $primary;
-    border-top: 40px solid $primaryDark;
-    justify-content: center;
-  }
-
   .headerContent {
     display: flex;
     flex-direction: row;

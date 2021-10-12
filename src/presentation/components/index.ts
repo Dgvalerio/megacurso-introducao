@@ -9,6 +9,11 @@ export { default as Footer } from './footer/footer';
 export { default as FormStatus } from './form-status/form-status';
 
 /**
+ * Header
+ * */
+export { default as Header } from './header/header';
+
+/**
  * Input
  * */
 export { default as Input } from './input/input';

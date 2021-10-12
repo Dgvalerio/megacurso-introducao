@@ -1,20 +1,11 @@
 import React, { FC } from 'react';
 
-import { Footer, Logo } from '../../components';
+import { Footer, Header } from '../../components';
 import Styles from './survey-list-styles.scss';
 
 const SurveyList: FC = () => (
   <div className={Styles.surveyListWrap}>
-    <header className={Styles.headerWrap}>
-      <div className={Styles.headerContent}>
-        <Logo />
-        <div className={Styles.logoutWrap}>
-          <span>Davi</span>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a href="#">Sair</a>
-        </div>
-      </div>
-    </header>
+    <Header />
     <div className={Styles.contentWrap}>
       <h2>Enquetes</h2>
       <ul>
