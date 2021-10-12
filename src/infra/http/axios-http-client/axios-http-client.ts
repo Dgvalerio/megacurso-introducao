@@ -9,17 +9,17 @@ import {
 export class AxiosHttpClient implements HttpPostClient {
   // eslint-disable-next-line class-methods-use-this
   async post(params: HttpPostParams<any>): Promise<HttpResponse> {
-    let httpResponse: AxiosResponse;
+    let axiosResponse: AxiosResponse;
 
     try {
-      httpResponse = await axios.post(params.url, params.body);
+      axiosResponse = await axios.post(params.url, params.body);
     } catch (e) {
-      httpResponse = e.response;
+      axiosResponse = e.response;
     }
 
     return {
-      statusCode: httpResponse.status,
-      body: httpResponse.data,
+      statusCode: axiosResponse.status,
+      body: axiosResponse.data,
     };
   }
 }
