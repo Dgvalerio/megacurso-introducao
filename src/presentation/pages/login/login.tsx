@@ -67,7 +67,7 @@ const Login: FC<Props> = ({ validation, authentication, saveAccessToken }) => {
   };
 
   return (
-    <div className={Styles.login}>
+    <div className={Styles.loginWrap}>
       <LoginHeader />
       <Context.Provider value={{ state, setState }}>
         <form
