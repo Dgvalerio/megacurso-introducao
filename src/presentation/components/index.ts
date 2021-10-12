@@ -14,6 +14,11 @@ export { default as FormStatus } from './form-status/form-status';
 export { default as Header } from './header/header';
 
 /**
+ * Icon
+ * */
+export { default as Icon, IconName } from './icon/icon';
+
+/**
  * Input
  * */
 export { default as Input } from './input/input';
