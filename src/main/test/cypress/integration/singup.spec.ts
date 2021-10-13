@@ -127,7 +127,7 @@ describe('Signup', () => {
 
     FormHelper.testUrl('/');
 
-    FormHelper.testLocalStorageItem('accessToken');
+    FormHelper.testLocalStorageItem('account');
   });
 
   it('should prevent multiple submit', () => {

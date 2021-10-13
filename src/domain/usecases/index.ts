@@ -11,4 +11,4 @@ export * from './add-account';
 /**
  * Save Access Token
  * */
-export * from './save-access-token';
+export * from './update-current-account';

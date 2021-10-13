@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { Authentication, SaveAccessToken } from '../../../domain/usecases';
+import { Authentication, UpdateCurrentAccount } from '../../../domain/usecases';
 import {
   Footer,
   FormStatus,
@@ -16,10 +16,14 @@ import Styles from './login-styles.scss';
 type Props = {
   validation: Validation;
   authentication: Authentication;
-  saveAccessToken: SaveAccessToken;
+  updateCurrentAccount: UpdateCurrentAccount;
 };
 
-const Login: FC<Props> = ({ validation, authentication, saveAccessToken }) => {
+const Login: FC<Props> = ({
+  validation,
+  authentication,
+  updateCurrentAccount,
+}) => {
   const history = useHistory();
   const [state, setState] = useState({
     isLoading: false,
@@ -59,7 +63,7 @@ const Login: FC<Props> = ({ validation, authentication, saveAccessToken }) => {
         password: state.password,
       });
 
-      await saveAccessToken.save(account.accessToken);
+      await updateCurrentAccount.save(account);
       history.replace('/');
     } catch (e) {
       setState((prev) => ({ ...prev, isLoading: false, mainError: e.message }));
