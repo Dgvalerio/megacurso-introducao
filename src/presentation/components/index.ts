@@ -34,11 +34,6 @@ export { default as LoginHeader } from './login-header/login-header';
 export { default as Logo } from './logo/logo';
 
 /**
- * Router
- * */
-export { default as Router } from './router/router';
-
-/**
  * Spinner
  * */
 export { default as Spinner } from './spinner/spinner';
