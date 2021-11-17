@@ -14,11 +14,6 @@ export * from './mock-add-account';
 export * from './mock-authentication';
 
 /**
- * Save Access Token Mock
- * */
-export * from './mock-update-current-account';
-
-/**
  * Validation Mock
  * */
 export * from './mock-validation';

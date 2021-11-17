@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { Authentication, UpdateCurrentAccount } from '../../../domain/usecases';
+import { Authentication } from '../../../domain/usecases';
 import {
   Footer,
   FormStatus,
@@ -9,21 +9,17 @@ import {
   LoginHeader,
   SubmitButton,
 } from '../../components';
-import Context from '../../contexts/form/form-context';
+import { FormContext, ApiContext } from '../../contexts';
 import { Validation } from '../../protocols/validation';
 import Styles from './login-styles.scss';
 
 type Props = {
   validation: Validation;
   authentication: Authentication;
-  updateCurrentAccount: UpdateCurrentAccount;
 };
 
-const Login: FC<Props> = ({
-  validation,
-  authentication,
-  updateCurrentAccount,
-}) => {
+const Login: FC<Props> = ({ validation, authentication }) => {
+  const { setCurrentAccount } = useContext(ApiContext);
   const history = useHistory();
   const [state, setState] = useState({
     isLoading: false,
@@ -63,7 +59,7 @@ const Login: FC<Props> = ({
         password: state.password,
       });
 
-      await updateCurrentAccount.save(account);
+      setCurrentAccount(account);
       history.replace('/');
     } catch (e) {
       setState((prev) => ({ ...prev, isLoading: false, mainError: e.message }));
@@ -73,7 +69,7 @@ const Login: FC<Props> = ({
   return (
     <div className={Styles.loginWrap}>
       <LoginHeader />
-      <Context.Provider value={{ state, setState }}>
+      <FormContext.Provider value={{ state, setState }}>
         <form
           className={Styles.form}
           onSubmit={handleSubmit}
@@ -98,7 +94,7 @@ const Login: FC<Props> = ({
           </Link>
           <FormStatus />
         </form>
-      </Context.Provider>
+      </FormContext.Provider>
       <Footer />
     </div>
   );
