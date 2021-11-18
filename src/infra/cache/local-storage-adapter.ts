@@ -1,8 +1,12 @@
-import { SetStorage } from '../../data/protocols/cache/set-storage';
+/* eslint-disable class-methods-use-this */
+import { GetStorage, SetStorage } from '../../data/protocols/cache';
 
-export class LocalStorageAdapter implements SetStorage {
-  // eslint-disable-next-line class-methods-use-this
+export class LocalStorageAdapter implements SetStorage, GetStorage {
   set(key: string, value: object): void {
     localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  get(key: string): any {
+    return JSON.parse(localStorage.getItem(key));
   }
 }
