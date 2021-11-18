@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import { PrivateRoute } from '../../presentation/components';
 import { ApiContext } from '../../presentation/contexts';
 import { SurveyList } from '../../presentation/pages';
 import {
@@ -21,7 +22,7 @@ const Router: FC = () => (
       <Switch>
         <Route path="/login" exact component={MakeLogin} />
         <Route path="/signup" exact component={MakeSignUp} />
-        <Route path="/" exact component={SurveyList} />
+        <PrivateRoute path="/" exact component={SurveyList} />
       </Switch>
     </BrowserRouter>
   </ApiContext.Provider>

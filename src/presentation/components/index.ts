@@ -34,6 +34,11 @@ export { default as LoginHeader } from './login-header/login-header';
 export { default as Logo } from './logo/logo';
 
 /**
+ * PrivateRoute
+ * */
+export { default as PrivateRoute } from './private-route/private-route';
+
+/**
  * Spinner
  * */
 export { default as Spinner } from './spinner/spinner';
