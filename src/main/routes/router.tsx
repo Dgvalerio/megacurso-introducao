@@ -3,7 +3,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { ApiContext } from '../../presentation/contexts';
 import { SurveyList } from '../../presentation/pages';
-import { setCurrentAccountAdapter } from '../adapters/current-account-adapter';
+import {
+  getCurrentAccountAdapter,
+  setCurrentAccountAdapter,
+} from '../adapters/current-account-adapter';
 import MakeLogin from '../factories/pages/login/login-factory';
 import MakeSignUp from '../factories/pages/signup/sign-up-factory';
 
@@ -11,6 +14,7 @@ const Router: FC = () => (
   <ApiContext.Provider
     value={{
       setCurrentAccount: setCurrentAccountAdapter,
+      getCurrentAccount: getCurrentAccountAdapter,
     }}
   >
     <BrowserRouter>
