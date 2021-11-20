@@ -16,6 +16,7 @@
     "check": "npm-check -u -s"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.0",
     "@types/axios": "^0.14.0",
     "@types/faker": "^5.5.8",
