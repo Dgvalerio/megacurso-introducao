@@ -19,7 +19,7 @@ const Icon: FC<Props> = ({ iconName, className }) => {
 
   return (
     <div className={[Styles.iconWrap, iconColor, className].join(' ')}>
-      <img src={iconName} alt="Green icon" />
+      <img data-testid="icon" src={iconName} alt="Green icon" />
     </div>
   );
 };
