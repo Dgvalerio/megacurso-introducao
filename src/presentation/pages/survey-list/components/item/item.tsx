@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 
 import { SurveyModel } from '../../../../../domain/models';
 import { Icon, IconName } from '../../../../components';
-import Styles from './survey-item-styles.scss';
+import Styles from './item-styles.scss';
 
 type Props = {
   survey: SurveyModel;
 };
 
-const SurveyItem: FC<Props> = ({ survey }) => {
+const Item: FC<Props> = ({ survey }) => {
   const iconName = survey.didAnswer ? IconName.thumbUp : IconName.thumbDown;
 
   return (
@@ -35,4 +35,4 @@ const SurveyItem: FC<Props> = ({ survey }) => {
   );
 };
 
-export default SurveyItem;
+export default Item;

@@ -4,13 +4,13 @@ import React from 'react';
 
 import { mockSurveyModel } from '../../../../../domain/test';
 import { IconName } from '../../../../components';
-import SurveyItem from './survey-item';
+import Item from './item';
 
 const makeSut = (survey = mockSurveyModel()): void => {
-  render(<SurveyItem survey={survey} />);
+  render(<Item survey={survey} />);
 };
 
-describe('SurveyItem Component', () => {
+describe('Item Component', () => {
   test('Should render with correct values (when didAnswer is true)', () => {
     const survey = Object.assign(mockSurveyModel(), {
       didAnswer: true,
