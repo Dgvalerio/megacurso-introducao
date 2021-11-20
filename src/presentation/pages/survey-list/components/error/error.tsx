@@ -5,13 +5,23 @@ import Styles from './error-styles.scss';
 
 const Error: FC = () => {
   const {
-    error: [error],
+    surveys: [, setSurveys],
+    error: [error, setError],
+    reload: [reload, setReload],
   } = useContext(SurveyContext);
+
+  const reLoad = () => {
+    setSurveys([]);
+    setError('');
+    setReload(!reload);
+  };
 
   return (
     <div className={Styles.errorWrap}>
       <span data-testid="error">{error}</span>
-      <button type="button">Recarregar</button>
+      <button data-testid="reload" type="button" onClick={reLoad}>
+        Tentar novamente
+      </button>
     </div>
   );
 };

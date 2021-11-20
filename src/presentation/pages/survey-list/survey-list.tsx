@@ -13,6 +13,7 @@ type Props = {
 const SurveyList: FC<Props> = ({ loadSurveyList }) => {
   const [surveys, setSurveys] = useState<SurveyModel[]>([]);
   const [error, setError] = useState('');
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     loadSurveyList
@@ -22,7 +23,7 @@ const SurveyList: FC<Props> = ({ loadSurveyList }) => {
         setError('');
       })
       .catch((e) => setError(e.message));
-  }, []);
+  }, [reload]);
 
   return (
     <div className={Styles.surveyListWrap}>
@@ -33,6 +34,7 @@ const SurveyList: FC<Props> = ({ loadSurveyList }) => {
           value={{
             surveys: [surveys, setSurveys],
             error: [error, setError],
+            reload: [reload, setReload],
           }}
         >
           {error ? <Error /> : <SurveyListItem />}

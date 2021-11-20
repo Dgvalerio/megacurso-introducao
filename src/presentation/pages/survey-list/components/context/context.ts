@@ -7,6 +7,7 @@ type Props = {
     surveys: SurveyModel[],
     setSurveys: (survey: SurveyModel[]) => void
   ];
+  reload: [reload: boolean, setReload: (value: boolean) => void];
   error: [error: string, setError: (message: string) => void];
 };
 
