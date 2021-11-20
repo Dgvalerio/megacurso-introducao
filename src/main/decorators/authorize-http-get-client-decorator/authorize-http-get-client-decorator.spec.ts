@@ -7,6 +7,7 @@ import {
   HttpGetClientSpy,
   mockGetRequest,
 } from '../../../data/tests';
+import { mockAccountModel } from '../../../domain/test';
 import { AuthorizeHttpGetClientDecorator } from './authorize-http-get-client-decorator';
 
 type SutTypes = {
@@ -48,5 +49,20 @@ describe('AuthorizeHttpGetClientDecorator', () => {
 
     expect(httpGetClientSpy.url).toBe(httpRequest.url);
     expect(httpGetClientSpy.headers).toEqual(httpRequest.headers);
+  });
+
+  test('should add headers to HttpGerClient', async () => {
+    const { sut, httpGetClientSpy, getStorageSpy } = makeSut();
+    getStorageSpy.value = mockAccountModel();
+    const httpRequest: HttpGetParams = {
+      url: faker.internet.url(),
+    };
+
+    await sut.get(httpRequest);
+
+    expect(httpGetClientSpy.url).toBe(httpRequest.url);
+    expect(httpGetClientSpy.headers).toEqual({
+      'x-access-token': getStorageSpy.value.accessToken,
+    });
   });
 });
