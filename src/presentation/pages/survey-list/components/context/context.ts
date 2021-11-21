@@ -1,11 +1,11 @@
 import { createContext } from 'react';
 
-import { SurveyModel } from '../../../../../domain/models';
+import { LoadSurveyList } from '../../../../../domain/usecases/load-survey-list';
 
 type Props = {
   surveys: [
-    surveys: SurveyModel[],
-    setSurveys: (survey: SurveyModel[]) => void
+    surveys: LoadSurveyList.Model[],
+    setSurveys: (survey: LoadSurveyList.Model[]) => void
   ];
   reload: [reload: boolean, setReload: (value: boolean) => void];
   error: [error: string, setError: (message: string) => void];

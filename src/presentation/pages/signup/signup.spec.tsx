@@ -6,14 +6,14 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 
 import { EmailInUseError } from '../../../domain/errors';
-import { AccountModel } from '../../../domain/models';
+import { AddAccount } from '../../../domain/usecases';
 import { ApiContext } from '../../contexts';
 import { AddAccountSpy, Helper, ValidationStub } from '../../test';
 import { SignUp } from '../index';
 
 type SutTypes = {
   addAccountSpy: AddAccountSpy;
-  setCurrentAccountMock(account: AccountModel): void;
+  setCurrentAccountMock(account: AddAccount.Model): void;
 };
 
 type SutParams = {

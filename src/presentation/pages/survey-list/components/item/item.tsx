@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 
-import { SurveyModel } from '../../../../../domain/models';
+import { LoadSurveyList } from '../../../../../domain/usecases/load-survey-list';
 import { Icon, IconName } from '../../../../components';
 import Styles from './item-styles.scss';
 
 type Props = {
-  survey: SurveyModel;
+  survey: LoadSurveyList.Model;
 };
 
 const Item: FC<Props> = ({ survey }) => {

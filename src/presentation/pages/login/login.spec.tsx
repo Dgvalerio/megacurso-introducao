@@ -6,14 +6,14 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 
 import { InvalidCredentialsError } from '../../../domain/errors';
-import { AccountModel } from '../../../domain/models';
+import { Authentication } from '../../../domain/usecases';
 import { ApiContext } from '../../contexts';
 import { AuthenticationSpy, ValidationStub, Helper } from '../../test';
 import { Login } from '../index';
 
 type SutTypes = {
   authenticationSpy: AuthenticationSpy;
-  setCurrentAccountMock(account: AccountModel): void;
+  setCurrentAccountMock(account: Authentication.Model): void;
 };
 
 type SutParams = {

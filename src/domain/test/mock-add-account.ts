@@ -1,9 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as faker from 'faker';
 
-import { AddAccountParams } from '../usecases';
+import { AddAccount } from '../usecases';
+import { mockAccountModel } from './mock-account';
 
-export const mockAddAccount = (): AddAccountParams => {
+export const mockAddAccount = (): AddAccount.Params => {
   const password = faker.internet.password();
 
   return {
@@ -13,3 +14,5 @@ export const mockAddAccount = (): AddAccountParams => {
     passwordConfirmation: password,
   };
 };
+
+export const mockAddAccountModel = (): AddAccount.Model => mockAccountModel();

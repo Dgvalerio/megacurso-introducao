@@ -1,9 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as faker from 'faker';
 
-import { SurveyModel } from '../models';
+import { LoadSurveyList } from '../usecases/load-survey-list';
 
-export const mockSurveyModel = (): SurveyModel => ({
+export const mockSurveyModel = (): LoadSurveyList.Model => ({
   id: faker.datatype.uuid(),
   question: faker.random.words(10),
   answers: [
@@ -14,7 +14,7 @@ export const mockSurveyModel = (): SurveyModel => ({
   date: faker.date.recent(),
 });
 
-export const mockSurveyListModel = (): SurveyModel[] => [
+export const mockSurveyListModel = (): LoadSurveyList.Model[] => [
   mockSurveyModel(),
   mockSurveyModel(),
   mockSurveyModel(),

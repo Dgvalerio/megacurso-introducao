@@ -1,15 +1,14 @@
 import { UnexpectedError } from '../../../domain/errors';
-import { SurveyModel } from '../../../domain/models';
 import { LoadSurveyList } from '../../../domain/usecases/load-survey-list';
 import { HttpGetClient, HttpStatusCode } from '../../protocols/http';
 
 export class RemoteLoadSurveyList implements LoadSurveyList {
   constructor(
     private readonly url: string,
-    private readonly httpGetClient: HttpGetClient<SurveyModel[]>
+    private readonly httpGetClient: HttpGetClient<LoadSurveyList.Model[]>
   ) {} // eslint-disable-line no-empty-function
 
-  async loadAll(): Promise<SurveyModel[]> {
+  async loadAll(): Promise<LoadSurveyList.Model[]> {
     const httpResponse = await this.httpGetClient.get({ url: this.url });
 
     switch (httpResponse.statusCode) {

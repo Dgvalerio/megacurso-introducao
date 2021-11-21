@@ -9,6 +9,11 @@ export * from './mock-account';
 export * from './mock-add-account';
 
 /**
+ * Authentication
+ * */
+export * from './mock-authentication';
+
+/**
  * Survey List
  * */
 export * from './mock-survey-list';
