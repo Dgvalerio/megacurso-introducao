@@ -1,10 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
 import React from 'react';
+import { Router } from 'react-router-dom';
 
 import { UnexpectedError } from '../../../domain/errors';
 import { mockSurveyListModel } from '../../../domain/test';
 import { LoadSurveyList } from '../../../domain/usecases/load-survey-list';
+import { ApiContext } from '../../contexts';
 import SurveyList from './survey-list';
 
 class LoadSurveyListSpy implements LoadSurveyList {
@@ -24,7 +27,13 @@ type SutTypes = {
 };
 
 const makeSut = (loadSurveyListSpy = new LoadSurveyListSpy()): SutTypes => {
-  render(<SurveyList loadSurveyList={loadSurveyListSpy} />);
+  render(
+    <ApiContext.Provider value={{ setCurrentAccount: jest.fn() }}>
+      <Router history={createMemoryHistory()}>
+        <SurveyList loadSurveyList={loadSurveyListSpy} />
+      </Router>
+    </ApiContext.Provider>
+  );
 
   return { loadSurveyListSpy };
 };
