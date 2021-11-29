@@ -7,7 +7,7 @@ import Styles from './header-styles.scss';
 
 const Header: FC = () => {
   const history = useHistory();
-  const { setCurrentAccount } = useContext(ApiContext);
+  const { setCurrentAccount, getCurrentAccount } = useContext(ApiContext);
 
   const logout = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -22,7 +22,7 @@ const Header: FC = () => {
       <div className={Styles.headerContent}>
         <Logo />
         <div className={Styles.logoutWrap}>
-          <span>Davi</span>
+          <span data-testid="username">{getCurrentAccount().name}</span>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href="#" data-testid="logout" onClick={logout}>
             Sair
