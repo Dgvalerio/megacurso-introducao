@@ -1,9 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
 
-import * as FormHelper from '../support/form-helpers';
-import * as Helper from '../support/helpers';
-import * as Http from '../support/signup-mocks';
+import * as FormHelper from '../utils/form-helpers';
+import * as Helper from '../utils/helpers';
+import * as Http from '../utils/http-mocks';
+
+const path = /signup/;
 
 const populateFields = () => {
   cy.getByTestId('name').focus().type(faker.name.findName());
@@ -17,6 +19,16 @@ const simulateValidSubmit = () => {
   populateFields();
   cy.getByTestId('submit').click();
 };
+
+export const mockEmailInUseError = () => Http.mockForbiddenError(path, 'POST');
+
+export const mockUnexpectedError = () => Http.mockServerError(path, 'POST');
+
+export const mockSuccess = () =>
+  Http.mockOk(path, 'POST', {
+    accessToken: faker.datatype.uuid(),
+    name: faker.name.findName(),
+  });
 
 describe('Signup', () => {
   beforeEach(() => {
@@ -85,7 +97,7 @@ describe('Signup', () => {
   });
 
   it('should present EmailInUseError on 403', () => {
-    Http.mockEmailInUseError();
+    mockEmailInUseError();
 
     simulateValidSubmit();
 
@@ -95,7 +107,7 @@ describe('Signup', () => {
   });
 
   it('should present UnexpectedError on default error cases', () => {
-    Http.mockUnexpectedError();
+    mockUnexpectedError();
 
     simulateValidSubmit();
 
@@ -107,7 +119,7 @@ describe('Signup', () => {
   });
 
   it('should save accessToken if valid credentials are provided', () => {
-    Http.mockOk();
+    mockSuccess();
 
     simulateValidSubmit();
 
@@ -120,7 +132,7 @@ describe('Signup', () => {
   });
 
   it('should prevent multiple submit', () => {
-    Http.mockOk();
+    mockSuccess();
 
     populateFields();
 
@@ -130,7 +142,7 @@ describe('Signup', () => {
   });
 
   it('should not call submit if form is invalid', () => {
-    Http.mockOk();
+    mockSuccess();
 
     cy.getByTestId('email')
       .focus()

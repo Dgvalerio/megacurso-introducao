@@ -33,7 +33,7 @@ export const mockServerError = (url: RegExp, method: string) => {
   }).as('request');
 };
 
-export const mockOk = (method: string, url: RegExp, response: any) => {
+export const mockOk = (url: RegExp, method: string, response: any) => {
   cy.server();
   cy.route({
     method,
