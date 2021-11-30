@@ -1,0 +1,16 @@
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import { ApiContext } from '../contexts';
+
+type ResultType = () => void;
+
+export const useLogout = (): ResultType => {
+  const history = useHistory();
+  const { setCurrentAccount } = useContext(ApiContext);
+
+  return () => {
+    setCurrentAccount(undefined);
+    history.replace('/login');
+  };
+};
