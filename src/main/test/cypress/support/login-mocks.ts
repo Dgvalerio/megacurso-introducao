@@ -1,21 +1,15 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
 
-import * as Helper from './http-mocks';
+import * as Http from './http-mocks';
 
 export const mockInvalidCredentialsError = () =>
-  Helper.mockInvalidCredentialsError(/login/);
+  Http.mockUnauthorizedError(/login/);
 
-export const mockUnexpectedError = () =>
-  Helper.mockUnexpectedError('POST', /login/);
+export const mockUnexpectedError = () => Http.mockServerError(/login/, 'POST');
 
 export const mockOk = () =>
-  Helper.mockOk('POST', /login/, {
+  Http.mockOk('POST', /login/, {
     accessToken: faker.datatype.uuid(),
     name: faker.name.findName(),
-  });
-
-export const mockInvalidData = () =>
-  Helper.mockOk('POST', /login/, {
-    invalid: faker.datatype.uuid(),
   });

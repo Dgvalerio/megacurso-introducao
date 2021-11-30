@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
 
-export const mockInvalidCredentialsError = (url: RegExp) => {
+export const mockUnauthorizedError = (url: RegExp) => {
   cy.server();
   cy.route({
     method: 'POST',
@@ -11,17 +11,17 @@ export const mockInvalidCredentialsError = (url: RegExp) => {
   }).as('request');
 };
 
-export const mockEmailInUseError = (url: RegExp) => {
+export const mockForbiddenError = (url: RegExp, method: string) => {
   cy.server();
   cy.route({
-    method: 'POST',
+    method,
     url,
     status: 403,
     response: { error: faker.random.words() },
   }).as('request');
 };
 
-export const mockUnexpectedError = (method: string, url: RegExp) => {
+export const mockServerError = (url: RegExp, method: string) => {
   cy.server();
   cy.route({
     method,
