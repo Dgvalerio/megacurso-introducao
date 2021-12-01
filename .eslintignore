@@ -10,7 +10,7 @@ node_modules
 # Jest
 coverage
 
-# Public
-public
+# Dist
+dist
 *.scss
 *.json
