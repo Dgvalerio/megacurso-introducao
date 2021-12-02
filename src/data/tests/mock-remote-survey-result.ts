@@ -12,11 +12,13 @@ export const mockRemoteSurveyResultModel =
         image: faker.internet.url(),
         count: faker.datatype.number(),
         percent: faker.datatype.number(),
+        isCurrentAccountAnswer: faker.datatype.boolean(),
       },
       {
         answer: faker.random.words(5),
         count: faker.datatype.number(),
         percent: faker.datatype.number(),
+        isCurrentAccountAnswer: faker.datatype.boolean(),
       },
     ],
     date: faker.date.recent().toISOString(),
