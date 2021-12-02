@@ -1,5 +1,7 @@
+// Mocks
+
 /**
- * Http Mock
+ * Http
  * */
 export * from './mock-http';
 
@@ -9,6 +11,11 @@ export * from './mock-http';
 export * from './mock-cache';
 
 /**
- * Remote SurveyList
+ * Remote Survey List
  * */
 export * from './mock-remote-survey-list';
+
+/**
+ * Remote Survey List
+ * */
+export * from './mock-remote-survey-result';
