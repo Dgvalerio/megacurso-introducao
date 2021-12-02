@@ -1,5 +1,6 @@
 /* eslint-disable no-empty-function */
-import { HttpGetClient } from '../../protocols/http';
+import { AccessDeniedError } from '../../../domain/errors';
+import { HttpGetClient, HttpStatusCode } from '../../protocols/http';
 
 export class RemoteLoadSurveyResult {
   constructor(
@@ -8,6 +9,13 @@ export class RemoteLoadSurveyResult {
   ) {}
 
   async load(): Promise<void> {
-    await this.httpGetClient.get({ url: this.url });
+    const httpResponse = await this.httpGetClient.get({ url: this.url });
+
+    switch (httpResponse.statusCode) {
+      case HttpStatusCode.ok:
+        break;
+      default:
+        throw new AccessDeniedError();
+    }
   }
 }
