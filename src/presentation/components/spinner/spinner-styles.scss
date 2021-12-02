@@ -34,6 +34,12 @@
       animation: lds-ellipsis3 0.6s infinite;
     }
   }
+
+  &.negative {
+    div {
+      background-color: $white;
+    }
+  }
 }
 
 @keyframes lds-ellipsis1 {

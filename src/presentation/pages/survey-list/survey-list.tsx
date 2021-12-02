@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { LoadSurveyList } from '../../../domain/usecases/load-survey-list';
+import { LoadSurveyList } from '../../../domain/usecases';
 import { Footer, Header } from '../../components';
 import { useErrorHandler } from '../../hooks';
 import { SurveyContext, SurveyListItem, Error } from './components';
