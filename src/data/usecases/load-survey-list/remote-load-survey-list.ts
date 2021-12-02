@@ -1,5 +1,5 @@
 import { AccessDeniedError, UnexpectedError } from '../../../domain/errors';
-import { LoadSurveyList } from '../../../domain/usecases/load-survey-list';
+import { LoadSurveyList } from '../../../domain/usecases';
 import { HttpGetClient, HttpStatusCode } from '../../protocols/http';
 
 // eslint-disable-next-line import/export
