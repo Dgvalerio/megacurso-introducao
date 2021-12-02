@@ -1,6 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as faker from 'faker';
 
+import { AccessDeniedError } from '../../../domain/errors';
+import { HttpStatusCode } from '../../protocols/http';
 import { HttpGetClientSpy } from '../../tests';
 import { RemoteLoadSurveyResult } from './remote-load-survey-result';
 
@@ -25,5 +27,17 @@ describe('RemoteLoadSurveyResult', () => {
     await sut.load();
 
     expect(httpGetClientSpy.url).toBe(url);
+  });
+
+  test('Should throw AccessDeniedError if HttpGetClient returns 403', async () => {
+    const { sut, httpGetClientSpy } = makeSut();
+
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.forbidden,
+    };
+
+    const promise = sut.load();
+
+    await expect(promise).rejects.toThrow(new AccessDeniedError());
   });
 });
