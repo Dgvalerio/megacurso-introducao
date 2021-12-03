@@ -4,5 +4,6 @@
   "supportFile": "src/main/test/cypress/support/index.js",
   "integrationFolder": "src/main/test/cypress/integration",
   "pluginsFile": false,
-  "watchForFileChanges": false
+  "watchForFileChanges": false,
+  "video": false
 }
