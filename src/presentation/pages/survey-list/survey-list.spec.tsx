@@ -7,7 +7,7 @@ import { Router } from 'react-router-dom';
 import { AccessDeniedError, UnexpectedError } from '../../../domain/errors';
 import { AccountModel } from '../../../domain/models';
 import { mockAccountModel, mockSurveyListModel } from '../../../domain/test';
-import { LoadSurveyList } from '../../../domain/usecases/load-survey-list';
+import { LoadSurveyList } from '../../../domain/usecases';
 import { ApiContext } from '../../contexts';
 import SurveyList from './survey-list';
 
