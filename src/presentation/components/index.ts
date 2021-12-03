@@ -1,6 +1,11 @@
 // Components
 
 /**
+ * Calendar
+ * */
+export { default as Calendar } from './calendar/calendar';
+
+/**
  * Footer
  * */
 export { default as Footer } from './footer/footer';
