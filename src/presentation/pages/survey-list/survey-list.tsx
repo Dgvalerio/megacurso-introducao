@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { LoadSurveyList } from '../../../domain/usecases';
 import { Footer, Header, Error as ErrorComponent } from '../../components';
 import { useErrorHandler } from '../../hooks';
-import { SurveyContext, SurveyListItem } from './components';
+import { SurveyListItem } from './components';
 import Styles from './survey-list-styles.scss';
 
 type Props = {
@@ -40,19 +40,11 @@ const SurveyList: FC<Props> = ({ loadSurveyList }) => {
       <Header />
       <div className={Styles.contentWrap}>
         <h2>Enquetes</h2>
-        <SurveyContext.Provider
-          value={{
-            surveys: [surveys, setSurveys],
-            error: [error, setError],
-            reload: [reload, setReload],
-          }}
-        >
-          {error ? (
-            <ErrorComponent error={error} reload={reLoad} />
-          ) : (
-            <SurveyListItem />
-          )}
-        </SurveyContext.Provider>
+        {error ? (
+          <ErrorComponent error={error} reload={reLoad} />
+        ) : (
+          <SurveyListItem surveys={surveys} />
+        )}
       </div>
       <Footer />
     </div>

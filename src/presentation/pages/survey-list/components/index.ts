@@ -1,9 +1,4 @@
 /**
- * Context
- * */
-export { default as SurveyContext } from './context/context';
-
-/**
  * Item
  * */
 export { default as SurveyItem } from './item/item';
