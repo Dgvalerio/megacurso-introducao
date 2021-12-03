@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import FlipMove from 'react-flip-move';
 
 import { LoadSurveyResult } from '../../../domain/usecases';
@@ -11,10 +11,18 @@ import {
 } from '../../components';
 import Styles from './survey-result-styles.scss';
 
-const SurveyResult: FC = () => {
+type Props = {
+  loadSurveyResult: LoadSurveyResult;
+};
+
+const SurveyResult: FC<Props> = ({ loadSurveyResult }) => {
   const [isLoading] = useState(false);
   const [error] = useState('');
   const [surveyResult] = useState<LoadSurveyResult.Model>(null);
+
+  useEffect(() => {
+    loadSurveyResult.load().then().catch();
+  });
 
   return (
     <div className={Styles.surveyResultWrap}>
