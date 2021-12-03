@@ -1,12 +1,18 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { screen, render } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
 import React from 'react';
 
-import { mockAccountModel } from '../../../domain/test';
+import { LoadSurveyResultSpy, mockAccountModel } from '../../../domain/test';
 import { ApiContext } from '../../contexts';
 import SurveyResult from './survey-result';
 
-const makeSut = (): void => {
+type SutTypes = {
+  loadSurveyResultSpy: LoadSurveyResultSpy;
+};
+
+const makeSut = (): SutTypes => {
+  const loadSurveyResultSpy = new LoadSurveyResultSpy();
+
   render(
     <ApiContext.Provider
       value={{
@@ -14,13 +20,15 @@ const makeSut = (): void => {
         getCurrentAccount: () => mockAccountModel(),
       }}
     >
-      <SurveyResult />
+      <SurveyResult loadSurveyResult={loadSurveyResultSpy} />
     </ApiContext.Provider>
   );
+
+  return { loadSurveyResultSpy };
 };
 
 describe('SurveyResult Component', () => {
-  test('Should present correct initial state', () => {
+  test('Should present correct initial state', async () => {
     makeSut();
 
     const surveyResult = screen.getByTestId('survey-result');
@@ -28,5 +36,14 @@ describe('SurveyResult Component', () => {
     expect(surveyResult.childElementCount).toBe(0);
     expect(screen.queryByTestId('error')).not.toBeInTheDocument();
     expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
+    await waitFor(() => surveyResult);
+  });
+
+  test('Should call LoadSurveyResult', async () => {
+    const { loadSurveyResultSpy } = makeSut();
+
+    await waitFor(() => screen.getByTestId('survey-result'));
+
+    expect(loadSurveyResultSpy.callsCount).toBe(1);
   });
 });

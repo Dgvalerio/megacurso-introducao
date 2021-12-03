@@ -17,3 +17,8 @@ export * from './mock-authentication';
  * Survey List
  * */
 export * from './mock-survey-list';
+
+/**
+ * Survey Result
+ * */
+export * from './mock-survey-result';
