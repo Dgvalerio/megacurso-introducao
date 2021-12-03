@@ -1,7 +1,6 @@
 const { baseUrl } = Cypress.config();
 
 export const testHttpCallsCount = (count: number) => {
-  cy.wait('@request');
   cy.get('@request.all').should('have.length', count);
 };
 

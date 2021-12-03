@@ -11,6 +11,11 @@ export { default as Calendar } from './calendar/calendar';
 export { default as Footer } from './footer/footer';
 
 /**
+ * Error
+ * */
+export { default as Error } from './error/error';
+
+/**
  * Form Status
  * */
 export { default as FormStatus } from './form-status/form-status';

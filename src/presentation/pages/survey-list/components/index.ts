@@ -4,11 +4,6 @@
 export { default as SurveyContext } from './context/context';
 
 /**
- * Error
- * */
-export { default as Error } from './error/error';
-
-/**
  * Item
  * */
 export { default as SurveyItem } from './item/item';
