@@ -6,7 +6,7 @@ import Styles from './survey-result-styles.scss';
 
 const SurveyResult: FC = () => {
   const [isLoading] = useState(false);
-  const [haveContent] = useState(false);
+  const [haveContent] = useState(true);
 
   return (
     <div className={Styles.surveyResultWrap}>
