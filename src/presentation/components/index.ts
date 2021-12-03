@@ -1,3 +1,5 @@
+// Components
+
 /**
  * Footer
  * */
@@ -22,6 +24,11 @@ export { default as Icon, IconName } from './icon/icon';
  * Input
  * */
 export { default as Input } from './input/input';
+
+/**
+ * Loading
+ * */
+export { default as Loading } from './loading/loading';
 
 /**
  * Login Header
