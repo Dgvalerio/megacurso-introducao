@@ -9,6 +9,7 @@ import {
   Loading,
   Error as ErrorComponent,
 } from '../../components';
+import { useErrorHandler } from '../../hooks';
 import Styles from './survey-result-styles.scss';
 
 type Props = {
@@ -17,15 +18,20 @@ type Props = {
 
 const SurveyResult: FC<Props> = ({ loadSurveyResult }) => {
   const [isLoading] = useState(false);
-  const [error] = useState('');
+  const [error, setError] = useState('');
   const [surveyResult, setSurveyResult] =
     useState<LoadSurveyResult.Model>(null);
+
+  const handleError = useErrorHandler((e: Error) => {
+    setSurveyResult(null);
+    setError(e.message);
+  });
 
   useEffect(() => {
     loadSurveyResult
       .load()
       .then((survey) => setSurveyResult(survey))
-      .catch();
+      .catch(handleError);
   }, []);
 
   return (
