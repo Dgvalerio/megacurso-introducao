@@ -2,6 +2,7 @@
 import { screen, render, waitFor } from '@testing-library/react';
 import React from 'react';
 
+import { UnexpectedError } from '../../../domain/errors';
 import {
   LoadSurveyResultSpy,
   mockAccountModel,
@@ -14,10 +15,7 @@ type SutTypes = {
   loadSurveyResultSpy: LoadSurveyResultSpy;
 };
 
-const makeSut = (surveyResult = mockSurveyResultModel()): SutTypes => {
-  const loadSurveyResultSpy = new LoadSurveyResultSpy();
-  loadSurveyResultSpy.surveyResult = surveyResult;
-
+const makeSut = (loadSurveyResultSpy = new LoadSurveyResultSpy()): SutTypes => {
   render(
     <ApiContext.Provider
       value={{
@@ -53,12 +51,14 @@ describe('SurveyResult Component', () => {
   });
 
   test('Should present SurveyResult data on success', async () => {
+    const loadSurveyResultSpy = new LoadSurveyResultSpy();
     const surveyResult = Object.assign(mockSurveyResultModel(), {
       didAnswer: true,
       date: new Date('2020-01-10T00:00:00'),
     });
+    loadSurveyResultSpy.surveyResult = surveyResult;
 
-    makeSut(surveyResult);
+    makeSut(loadSurveyResultSpy);
 
     await waitFor(() => screen.getByTestId('survey-result'));
 
@@ -91,5 +91,21 @@ describe('SurveyResult Component', () => {
     const answerWraps = screen.queryAllByTestId('answer-wrap');
     expect(answerWraps[0]).toHaveClass('active');
     expect(answerWraps[1]).not.toHaveClass('active');
+  });
+
+  test('Should render error on UnexpectedError', async () => {
+    const loadSurveyResultSpy = new LoadSurveyResultSpy();
+
+    const error = new UnexpectedError();
+
+    jest.spyOn(loadSurveyResultSpy, 'load').mockRejectedValueOnce(error);
+
+    makeSut(loadSurveyResultSpy);
+
+    await waitFor(() => screen.getByTestId('survey-result'));
+
+    expect(screen.queryByTestId('question')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
+    expect(screen.getByTestId('error')).toHaveTextContent(error.message);
   });
 });
