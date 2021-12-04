@@ -21,6 +21,7 @@ const SurveyResult: FC<Props> = ({ loadSurveyResult }) => {
   const [error, setError] = useState('');
   const [surveyResult, setSurveyResult] =
     useState<LoadSurveyResult.Model>(null);
+  const [reload, setReload] = useState(false);
 
   const handleError = useErrorHandler((e: Error) => {
     setSurveyResult(null);
@@ -32,7 +33,13 @@ const SurveyResult: FC<Props> = ({ loadSurveyResult }) => {
       .load()
       .then((survey) => setSurveyResult(survey))
       .catch(handleError);
-  }, []);
+  }, [reload]);
+
+  const reloadHandler = () => {
+    setSurveyResult(null);
+    setError('');
+    setReload((prev) => !prev);
+  };
 
   return (
     <div className={Styles.surveyResultWrap}>
@@ -74,7 +81,7 @@ const SurveyResult: FC<Props> = ({ loadSurveyResult }) => {
           </>
         )}
         {isLoading && <Loading />}
-        {error && <ErrorComponent error={error} reload={() => {}} />}
+        {error && <ErrorComponent error={error} reload={reloadHandler} />}
       </div>
       <Footer />
     </div>
