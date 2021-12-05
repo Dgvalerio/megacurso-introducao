@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import FlipMove from 'react-flip-move';
+import { useHistory } from 'react-router-dom';
 
 import { LoadSurveyResult } from '../../../domain/usecases';
 import {
@@ -22,6 +23,7 @@ const SurveyResult: FC<Props> = ({ loadSurveyResult }) => {
   const [surveyResult, setSurveyResult] =
     useState<LoadSurveyResult.Model>(null);
   const [reload, setReload] = useState(false);
+  const { goBack } = useHistory();
 
   const handleError = useErrorHandler((e: Error) => {
     setSurveyResult(null);
@@ -77,7 +79,9 @@ const SurveyResult: FC<Props> = ({ loadSurveyResult }) => {
                 </li>
               ))}
             </FlipMove>
-            <button type="button">Voltar</button>
+            <button type="button" data-testid="back-button" onClick={goBack}>
+              Voltar
+            </button>
           </>
         )}
         {isLoading && <Loading />}
