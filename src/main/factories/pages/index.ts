@@ -1,24 +1,31 @@
+// Factories
+
 /**
- * Login Factory
+ * Login
  * */
 export * from './login/login-factory';
 
 /**
- * Login Validation Factory
+ * Login Validation
  * */
 export * from './login/login-validation-factory';
 
 /**
- * SignUp Factory
+ * SignU
  * */
 export * from './signup/sign-up-factory';
 
 /**
- * SignUp Validation Factory
+ * SignUp Validation
  * */
 export * from './signup/signup-validation-factory';
 
 /**
- * SurveyList Factory
+ * Survey List
  * */
 export * from './survey-list/survey-list-factory';
+
+/**
+ * Survey Result
+ * */
+export * from './survey-result/survey-result-factory';
