@@ -43,7 +43,10 @@ const SurveyResult: FC<Props> = ({ loadSurveyResult, saveSurveyResult }) => {
   };
 
   const onAnswer = (answer: string) => {
+    if (isLoading) return;
+
     setIsLoading(true);
+
     saveSurveyResult
       .save({ answer })
       .then((survey) => {
