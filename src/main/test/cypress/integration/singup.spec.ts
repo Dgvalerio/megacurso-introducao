@@ -20,11 +20,11 @@ const simulateValidSubmit = () => {
   cy.getByTestId('submit').click();
 };
 
-export const mockEmailInUseError = () => Http.mockForbiddenError(path, 'POST');
+const mockEmailInUseError = () => Http.mockForbiddenError(path, 'POST');
 
-export const mockUnexpectedError = () => Http.mockServerError(path, 'POST');
+const mockUnexpectedError = () => Http.mockServerError(path, 'POST');
 
-export const mockSuccess = () =>
+const mockSuccess = () =>
   Http.mockOk(path, 'POST', {
     accessToken: faker.datatype.uuid(),
     name: faker.name.findName(),

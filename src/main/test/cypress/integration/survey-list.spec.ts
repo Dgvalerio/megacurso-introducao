@@ -3,11 +3,11 @@ import * as Http from '../utils/http-mocks';
 
 const path = /surveys/;
 
-export const mockUnexpectedError = () => Http.mockServerError(path, 'GET');
+const mockUnexpectedError = () => Http.mockServerError(path, 'GET');
 
-export const mockAccessDeniedError = () => Http.mockForbiddenError(path, 'GET');
+const mockAccessDeniedError = () => Http.mockForbiddenError(path, 'GET');
 
-export const mockSuccess = () => Http.mockOk(path, 'GET', 'fx:survey-list');
+const mockSuccess = () => Http.mockOk(path, 'GET', 'fx:survey-list');
 
 describe('SurveyList', () => {
   beforeEach(() => {
