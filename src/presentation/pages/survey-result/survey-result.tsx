@@ -26,6 +26,7 @@ const SurveyResult: FC<Props> = ({ loadSurveyResult, saveSurveyResult }) => {
   const handleError = useErrorHandler((e: Error) => {
     setSurveyResult(null);
     setError(e.message);
+    setIsLoading(false);
   });
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const SurveyResult: FC<Props> = ({ loadSurveyResult, saveSurveyResult }) => {
 
   const onAnswer = (answer: string) => {
     setIsLoading(true);
-    saveSurveyResult.save({ answer }).then().catch();
+    saveSurveyResult.save({ answer }).then().catch(handleError);
   };
 
   return (
