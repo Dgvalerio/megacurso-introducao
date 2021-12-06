@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { LoadSurveyResult } from '../../../../../domain/usecases';
 import { Calendar } from '../../../../components';
+import { SurveyResultAnswer } from '../index';
 import Styles from './result-styles.scss';
 
 type Props = {
@@ -20,23 +21,11 @@ const Result: FC<Props> = ({ surveyResult }) => {
         <h2 data-testid="question">{surveyResult.question}</h2>
       </hgroup>
       <FlipMove className={Styles.answersList} data-testid="answers">
-        {surveyResult.answers.map((answer) => (
-          <li
-            key={answer.answer}
-            data-testid="answer-wrap"
-            className={answer.isCurrentAccountAnswer ? Styles.active : ''}
-          >
-            {answer.image && (
-              <img data-testid="image" src={answer.image} alt={answer.answer} />
-            )}
-            <span data-testid="answer" className={Styles.answer}>
-              {answer.answer}
-            </span>
-            <span data-testid="percent" className={Styles.percent}>
-              {answer.percent}%
-            </span>
-          </li>
-        ))}
+        <>
+          {surveyResult.answers.map((answer) => (
+            <SurveyResultAnswer answer={answer} key={answer.answer} />
+          ))}
+        </>
       </FlipMove>
       <button
         className={Styles.button}
