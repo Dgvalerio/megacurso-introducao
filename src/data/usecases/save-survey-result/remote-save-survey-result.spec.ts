@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as faker from 'faker';
 
-import { AccessDeniedError } from '../../../domain/errors';
+import { AccessDeniedError, UnexpectedError } from '../../../domain/errors';
 import { mockSaveSurveyResultParams } from '../../../domain/test';
 import { HttpStatusCode } from '../../protocols/http';
 import { HttpClientSpy, mockRemoteSurveyResultModel } from '../../tests';
@@ -49,5 +49,17 @@ describe('RemoteSaveSurveyResult', () => {
     const promise = sut.save(mockSaveSurveyResultParams());
 
     await expect(promise).rejects.toThrow(new AccessDeniedError());
+  });
+
+  test('Should throw UnexpectedError if HttpClient returns 404', async () => {
+    const { sut, httpClientSpy } = makeSut();
+
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.notFound,
+    };
+
+    const promise = sut.save(mockSaveSurveyResultParams());
+
+    await expect(promise).rejects.toThrow(new UnexpectedError());
   });
 });
