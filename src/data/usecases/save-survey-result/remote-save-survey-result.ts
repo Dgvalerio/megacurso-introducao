@@ -1,7 +1,8 @@
 /* eslint-disable no-empty-function */
+import { AccessDeniedError } from '../../../domain/errors';
 import { SaveSurveyResult } from '../../../domain/usecases';
 import { RemoteSurveyResultModel } from '../../models';
-import { HttpClient } from '../../protocols/http';
+import { HttpClient, HttpStatusCode } from '../../protocols/http';
 
 // eslint-disable-next-line import/export
 export class RemoteSaveSurveyResult implements SaveSurveyResult {
@@ -11,13 +12,18 @@ export class RemoteSaveSurveyResult implements SaveSurveyResult {
   ) {}
 
   async save(params: SaveSurveyResult.Params): Promise<SaveSurveyResult.Model> {
-    await this.httpClient.request({
+    const httpResponse = await this.httpClient.request({
       url: this.url,
       method: 'put',
       body: params,
     });
 
-    return null;
+    switch (httpResponse.statusCode) {
+      case HttpStatusCode.forbidden:
+        throw new AccessDeniedError();
+      default:
+        return null;
+    }
   }
 }
 
