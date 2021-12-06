@@ -1,5 +1,5 @@
 /* eslint-disable no-empty-function */
-import { AccessDeniedError } from '../../../domain/errors';
+import { AccessDeniedError, UnexpectedError } from '../../../domain/errors';
 import { SaveSurveyResult } from '../../../domain/usecases';
 import { RemoteSurveyResultModel } from '../../models';
 import { HttpClient, HttpStatusCode } from '../../protocols/http';
@@ -19,10 +19,12 @@ export class RemoteSaveSurveyResult implements SaveSurveyResult {
     });
 
     switch (httpResponse.statusCode) {
+      case HttpStatusCode.ok:
+        return null;
       case HttpStatusCode.forbidden:
         throw new AccessDeniedError();
       default:
-        return null;
+        throw new UnexpectedError();
     }
   }
 }
