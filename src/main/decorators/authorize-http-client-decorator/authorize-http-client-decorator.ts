@@ -1,27 +1,27 @@
 /* eslint-disable class-methods-use-this, no-empty-function */
 import { GetStorage } from '../../../data/protocols/cache';
 import {
-  HttpGetClient,
-  HttpGetParams,
+  HttpClient,
+  HttpRequest,
   HttpResponse,
 } from '../../../data/protocols/http';
 
-export class AuthorizeHttpGetClientDecorator implements HttpGetClient {
+export class AuthorizeHttpClientDecorator implements HttpClient {
   constructor(
     private readonly getStorage: GetStorage,
-    private readonly httpGetClient: HttpGetClient
+    private readonly httpClient: HttpClient
   ) {}
 
-  async get(params: HttpGetParams): Promise<HttpResponse> {
+  async request(data: HttpRequest): Promise<HttpResponse> {
     const account = this.getStorage.get('account');
 
     if (account?.accessToken)
-      Object.assign(params, {
-        headers: Object.assign(params.headers || {}, {
+      Object.assign(data, {
+        headers: Object.assign(data.headers || {}, {
           'x-access-token': account.accessToken,
         }),
       });
 
-    return this.httpGetClient.get(params);
+    return this.httpClient.request(data);
   }
 }

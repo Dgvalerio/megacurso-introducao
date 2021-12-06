@@ -2,49 +2,27 @@
 import * as faker from 'faker';
 
 import {
-  HttpPostParams,
-  HttpPostClient,
+  HttpClient,
+  HttpRequest,
   HttpResponse,
   HttpStatusCode,
-  HttpGetClient,
-  HttpGetParams,
 } from '../protocols/http';
 
-export const mockPostRequest = (): HttpPostParams<any> => ({
+export const mockHttpRequest = (): HttpRequest => ({
   url: faker.internet.url(),
+  method: faker.random.arrayElement(['get', 'post', 'put', 'delete']),
   body: faker.random.objectElement(),
-});
-
-export const mockGetRequest = (): HttpGetParams => ({
-  url: faker.internet.url(),
   headers: faker.random.objectElement(),
 });
 
-export class HttpPostClientSpy<BodyType = any, ResponseType = any>
-  implements HttpPostClient<BodyType, ResponseType>
+export class HttpClientSpy<BodyType = any, ResponseType = any>
+  implements HttpClient<ResponseType>
 {
   url?: string;
 
+  method?: string;
+
   body?: BodyType;
-
-  response: HttpResponse<ResponseType> = {
-    statusCode: HttpStatusCode.ok,
-  };
-
-  async post(
-    params: HttpPostParams<BodyType>
-  ): Promise<HttpResponse<ResponseType>> {
-    this.url = params.url;
-    this.body = params.body;
-
-    return Promise.resolve(this.response);
-  }
-}
-
-export class HttpGetClientSpy<ResponseType = any>
-  implements HttpGetClient<ResponseType>
-{
-  url: string;
 
   headers?: any;
 
@@ -52,9 +30,12 @@ export class HttpGetClientSpy<ResponseType = any>
     statusCode: HttpStatusCode.ok,
   };
 
-  async get(params: HttpGetParams): Promise<HttpResponse<ResponseType>> {
-    this.url = params.url;
-    this.headers = params.headers;
-    return this.response;
+  async request(data: HttpRequest): Promise<HttpResponse<ResponseType>> {
+    this.url = data.url;
+    this.method = data.method;
+    this.body = data.body;
+    this.headers = data.headers;
+
+    return Promise.resolve(this.response);
   }
 }

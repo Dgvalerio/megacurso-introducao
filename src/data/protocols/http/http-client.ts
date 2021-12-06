@@ -13,3 +13,16 @@ export type HttpResponse<BodyType = any> = {
   statusCode: HttpStatusCode;
   body?: BodyType;
 };
+
+export type HttpMethod = 'post' | 'get' | 'put' | 'delete';
+
+export type HttpRequest = {
+  url: string;
+  method: HttpMethod;
+  body?: any;
+  headers?: any;
+};
+
+export interface HttpClient<ResponseType = any> {
+  request(data: HttpRequest): Promise<HttpResponse<ResponseType>>;
+}

@@ -1,16 +1,19 @@
 import { AccessDeniedError, UnexpectedError } from '../../../domain/errors';
 import { LoadSurveyList } from '../../../domain/usecases';
-import { HttpGetClient, HttpStatusCode } from '../../protocols/http';
+import { HttpClient, HttpStatusCode } from '../../protocols/http';
 
 // eslint-disable-next-line import/export
 export class RemoteLoadSurveyList implements LoadSurveyList {
   constructor(
     private readonly url: string,
-    private readonly httpGetClient: HttpGetClient<RemoteLoadSurveyList.Model[]>
+    private readonly httpClient: HttpClient<RemoteLoadSurveyList.Model[]>
   ) {} // eslint-disable-line no-empty-function
 
   async loadAll(): Promise<LoadSurveyList.Model[]> {
-    const httpResponse = await this.httpGetClient.get({ url: this.url });
+    const httpResponse = await this.httpClient.request({
+      url: this.url,
+      method: 'get',
+    });
     const remoteSurveys = httpResponse.body || [];
 
     switch (httpResponse.statusCode) {

@@ -3,21 +3,19 @@ import {
   UnexpectedError,
 } from '../../../domain/errors';
 import { Authentication } from '../../../domain/usecases';
-import { HttpPostClient, HttpStatusCode } from '../../protocols/http';
+import { HttpClient, HttpStatusCode } from '../../protocols/http';
 
 // eslint-disable-next-line import/export
 export class RemoteAuthentication implements Authentication {
   constructor(
     private readonly url: string,
-    private readonly httpPostClient: HttpPostClient<
-      Authentication.Params,
-      RemoteAuthentication.Model
-    >
+    private readonly httpClient: HttpClient<RemoteAuthentication.Model>
   ) {} // eslint-disable-line no-empty-function
 
   async auth(params: Authentication.Params): Promise<Authentication.Model> {
-    const httpResponse = await this.httpPostClient.post({
+    const httpResponse = await this.httpClient.request({
       url: this.url,
+      method: 'post',
       body: params,
     });
 

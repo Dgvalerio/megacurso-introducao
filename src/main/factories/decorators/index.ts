@@ -1,4 +1,4 @@
 /**
- * Factory of AuthorizeHttpGetClientDecorator
+ * Factory of AuthorizeHttpClientDecorator
  * */
-export * from './authorize-http-get-client-decorator-factory';
+export * from './authorize-http-client-decorator-factory';
