@@ -19,3 +19,8 @@ export * from './load-survey-list/remote-load-survey-list-factory';
  * Load Survey Result
  * */
 export * from './load-survey-result/remote-load-survey-result-factory';
+
+/**
+ * Save Survey Result
+ * */
+export * from './save-survey-result/remote-save-survey-result-factory';
