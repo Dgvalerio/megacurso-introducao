@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as faker from 'faker';
 
+import { mockSaveSurveyResultParams } from '../../../domain/test';
 import { HttpStatusCode } from '../../protocols/http';
 import { HttpClientSpy, mockRemoteSurveyResultModel } from '../../tests';
 import { RemoteSaveSurveyResult } from './remote-save-survey-result';
@@ -19,7 +20,7 @@ const makeSut = (url = faker.internet.url()): SutTypes => {
 };
 
 describe('RemoteSaveSurveyResult', () => {
-  test('Should call HttpClient with correct URL and method', async () => {
+  test('Should call HttpClient with correct values', async () => {
     const url = faker.internet.url();
     const { sut, httpClientSpy } = makeSut(url);
 
@@ -28,9 +29,12 @@ describe('RemoteSaveSurveyResult', () => {
       body: mockRemoteSurveyResultModel(),
     };
 
-    await sut.save({ answer: faker.random.word() });
+    const saveSurveyResultParams = mockSaveSurveyResultParams();
+
+    await sut.save(saveSurveyResultParams);
 
     expect(httpClientSpy.url).toBe(url);
     expect(httpClientSpy.method).toBe('put');
+    expect(httpClientSpy.body).toEqual(saveSurveyResultParams);
   });
 });
