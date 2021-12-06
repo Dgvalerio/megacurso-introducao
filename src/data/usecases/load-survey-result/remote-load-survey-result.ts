@@ -1,6 +1,7 @@
 /* eslint-disable no-empty-function */
 import { AccessDeniedError, UnexpectedError } from '../../../domain/errors';
 import { LoadSurveyResult } from '../../../domain/usecases';
+import { RemoteSurveyResultModel } from '../../models';
 import { HttpClient, HttpStatusCode } from '../../protocols/http';
 
 // eslint-disable-next-line import/export
@@ -34,15 +35,5 @@ export class RemoteLoadSurveyResult implements LoadSurveyResult {
 
 // eslint-disable-next-line import/export
 export namespace RemoteLoadSurveyResult {
-  export type Model = {
-    question: string;
-    date: string;
-    answers: {
-      image?: string;
-      answer: string;
-      count: number;
-      percent: number;
-      isCurrentAccountAnswer: boolean;
-    }[];
-  };
+  export type Model = RemoteSurveyResultModel;
 }
