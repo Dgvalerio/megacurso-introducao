@@ -44,7 +44,13 @@ const SurveyResult: FC<Props> = ({ loadSurveyResult, saveSurveyResult }) => {
 
   const onAnswer = (answer: string) => {
     setIsLoading(true);
-    saveSurveyResult.save({ answer }).then().catch(handleError);
+    saveSurveyResult
+      .save({ answer })
+      .then((survey) => {
+        setSurveyResult(survey);
+        setIsLoading(false);
+      })
+      .catch(handleError);
   };
 
   return (
