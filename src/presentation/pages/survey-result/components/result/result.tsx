@@ -19,9 +19,11 @@ const Result: FC<Props> = ({ surveyResult }) => {
         <Calendar date={surveyResult.date} className={Styles.calendarWrap} />
         <h2 data-testid="question">{surveyResult.question}</h2>
       </hgroup>
-      {surveyResult.answers.map((answer) => (
-        <SurveyResultAnswer answer={answer} key={answer.answer} />
-      ))}
+      <ul className={Styles.answersList} data-testid="answers">
+        {surveyResult.answers.map((answer) => (
+          <SurveyResultAnswer answer={answer} key={answer.answer} />
+        ))}
+      </ul>
       <button
         className={Styles.button}
         type="button"
