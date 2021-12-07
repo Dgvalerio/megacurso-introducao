@@ -1,6 +1,6 @@
-import { AccessDeniedError, UnexpectedError } from '../../../domain/errors';
-import { LoadSurveyList } from '../../../domain/usecases';
-import { HttpClient, HttpStatusCode } from '../../protocols/http';
+import { HttpClient, HttpStatusCode } from 'src/data/protocols/http';
+import { AccessDeniedError, UnexpectedError } from 'src/domain/errors';
+import { LoadSurveyList } from 'src/domain/usecases';
 
 // eslint-disable-next-line import/export
 export class RemoteLoadSurveyList implements LoadSurveyList {

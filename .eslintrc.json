@@ -118,7 +118,8 @@
       }
     ],
     "react/jsx-props-no-spreading": "off",
-    "@typescript-eslint/method-signature-style": ["error", "method"]
+    "@typescript-eslint/method-signature-style": ["error", "method"],
+    "import/no-unresolved": [2, {"ignore": ["src"]}]
   },
   "settings": {
     "import/resolver": {

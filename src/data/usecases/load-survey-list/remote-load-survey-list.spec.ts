@@ -1,10 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
+import { RemoteLoadSurveyList } from 'src/data/usecases';
+import { AccessDeniedError, UnexpectedError } from 'src/domain/errors';
 
-import { AccessDeniedError, UnexpectedError } from '../../../domain/errors';
 import { HttpStatusCode } from '../../protocols/http';
 import { HttpClientSpy, mockRemoteSurveyListModel } from '../../tests';
-import { RemoteLoadSurveyList } from './remote-load-survey-list';
 
 type SutTypes = {
   sut: RemoteLoadSurveyList;

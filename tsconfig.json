@@ -18,7 +18,10 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "paths": {
+      "src/*": ["./*"]
+    }
   },
   "include": [
     "src"
