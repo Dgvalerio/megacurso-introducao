@@ -9,6 +9,11 @@ module.exports = {
     filename: 'main-bundle-[fullhash].js',
     publicPath: '/',
   },
-  resolve: { extensions: ['.ts', '.tsx', '.js', '.scss'] },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.scss'],
+    alias: {
+      src: path.join(__dirname, 'src'),
+    },
+  },
   plugins: [new CleanWebpackPlugin()],
 };
